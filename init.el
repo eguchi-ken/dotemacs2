@@ -17,13 +17,17 @@
 (setq visible-bell t)
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 (setq backup-directory-alist `((".*". ,temporary-file-directory)))
-
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(keyboard-translate ?\C-h ?\C-?)                           ; C-h で delete を発行
+(global-set-key (kbd "M-h") 'backward-kill-word)
+(global-set-key (kbd "C-t") 'other-window)
+(global-set-key (kbd "C-x SPC") 'cua-rectangle-mark-mode)  ; 矩形選択/入力
+(global-set-key (kbd "C-c l") 'toggle-truncate-lines)      ; 行末で折り返す <-> 折り返さない
 
 (package-initialize)
 (package-refresh-contents)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-
 (defvar my/favorite-packages
   '(
     magit

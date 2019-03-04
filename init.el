@@ -26,16 +26,17 @@
 (global-set-key (kbd "C-c l") 'toggle-truncate-lines)      ; 行末で折り返す <-> 折り返さない
 
 (package-initialize)
-(package-refresh-contents)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-(defvar my/favorite-packages
-  '(
-    magit
-    ))
+(package-refresh-contents)
+(defvar my/favorite-packages '(magit key-chord))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
     (package-install package)))
 
+(setq key-chord-two-keys-delay 0.04)
+(key-chord-mode 1)
+(key-chord-define-global "fd" 'find-file)
+(key-chord-define-global "gh" 'magit-status)
 
 ;; モードラインのカスタマイズ
 ;; https://qiita.com/kai2nenobu/items/ddf94c0e5a36919bc6db

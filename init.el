@@ -19,6 +19,13 @@
 (setq backup-directory-alist `((".*". ,temporary-file-directory)))
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+
+(add-hook 'org-mode-hook (lambda ()
+  (setq org-hide-leading-stars t)
+  (local-unset-key (kbd "M-h"))    ; org-mode の M-h を利用しない。
+  (org-indent-mode t)              ; インデントをヘッダに合わせる。
+  ))
+
 (keyboard-translate ?\C-h ?\C-?)                           ; C-h で delete を発行
 (global-set-key (kbd "M-h") 'backward-kill-word)
 (global-set-key (kbd "C-t") 'other-window)

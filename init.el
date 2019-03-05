@@ -28,7 +28,7 @@
 (package-initialize)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-refresh-contents)
-(defvar my/favorite-packages '(magit key-chord))
+(defvar my/favorite-packages '(magit key-chord rebecca-theme))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
     (package-install package)))
@@ -37,6 +37,8 @@
 (key-chord-mode 1)
 (key-chord-define-global "fd" 'find-file)
 (key-chord-define-global "gh" 'magit-status)
+
+(load-theme 'rebecca t)
 
 ;; モードラインのカスタマイズ
 ;; https://qiita.com/kai2nenobu/items/ddf94c0e5a36919bc6db

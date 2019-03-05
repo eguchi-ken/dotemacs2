@@ -1,8 +1,8 @@
 (ido-mode t)
 (setq ido-enable-flex-matching t)
 (menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
+; (tool-bar-mode -1)
+; (scroll-bar-mode -1)
 (show-paren-mode 1)
 (column-number-mode t)
 (global-hl-line-mode)
@@ -19,6 +19,13 @@
 (setq backup-directory-alist `((".*". ,temporary-file-directory)))
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+
+(add-hook 'org-mode-hook (lambda ()
+  (setq org-hide-leading-stars t)
+  (local-unset-key (kbd "M-h"))    ; org-mode の M-h を利用しない。
+  (org-indent-mode t)              ; インデントをヘッダに合わせる。
+  ))
+
 (keyboard-translate ?\C-h ?\C-?)                           ; C-h で delete を発行
 (global-set-key (kbd "M-h") 'backward-kill-word)
 (global-set-key (kbd "C-t") 'other-window)
@@ -28,7 +35,7 @@
 (package-initialize)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-refresh-contents)
-(defvar my/favorite-packages '(magit key-chord))
+(defvar my/favorite-packages '(magit key-chord rebecca-theme))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
     (package-install package)))
@@ -37,6 +44,8 @@
 (key-chord-mode 1)
 (key-chord-define-global "fd" 'find-file)
 (key-chord-define-global "gh" 'magit-status)
+
+(load-theme 'rebecca t)
 
 ;; モードラインのカスタマイズ
 ;; https://qiita.com/kai2nenobu/items/ddf94c0e5a36919bc6db

@@ -19,6 +19,12 @@
 (setq backup-directory-alist `((".*". ,temporary-file-directory)))
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+; https://qiita.com/tadsan/items/68b53c2b0e8bb87a78d7
+(setq recentf-max-saved-items 2000) ;; 2000ファイルまで履歴保存する
+(setq recentf-auto-cleanup 'never)  ;; 存在しないファイルは消さない
+(setq recentf-exclude '("/recentf" "COMMIT_EDITMSG" "/.?TAGS" "^/sudo:" "/\\.emacs\\.d/games/*-scores" "/\\.emacs\\.d/\\.cask/"))
+(setq recentf-auto-save-timer (run-with-idle-timer 30 t 'recentf-save-list))
+(recentf-mode 1)
 
 (add-hook 'org-mode-hook (lambda ()
   (setq org-hide-leading-stars t)
@@ -31,6 +37,7 @@
 (global-set-key (kbd "C-t") 'other-window)
 (global-set-key (kbd "C-x SPC") 'cua-rectangle-mark-mode)  ; 矩形選択/入力
 (global-set-key (kbd "C-c l") 'toggle-truncate-lines)      ; 行末で折り返す <-> 折り返さない
+(global-set-key (kbd "C-c t") 'recentf-open-files)
 
 (package-initialize)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)

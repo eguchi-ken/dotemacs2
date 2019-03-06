@@ -42,7 +42,7 @@
 (package-initialize)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-refresh-contents)
-(defvar my/favorite-packages '(magit key-chord rebecca-theme))
+(defvar my/favorite-packages '(magit key-chord rebecca-theme wdired))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
     (package-install package)))
@@ -51,8 +51,19 @@
 (key-chord-mode 1)
 (key-chord-define-global "fd" 'find-file)
 (key-chord-define-global "gh" 'magit-status)
+(key-chord-define-global "sd" 'save-buffer)
 
 (load-theme 'rebecca t)
+
+(require 'wdired)         ; Dired バッファの上でファイル名をリネームできるようにする
+(add-hook 'dired-mode-hook (lambda ()
+  (local-unset-key (kbd "C-t"))                         ; 普段の C-t をそのまま
+  (local-set-key (kbd "j")     'dired-next-line)        ; vim のような上下移動
+  (local-set-key (kbd "k")     'dired-previous-line)    ; vim のような上下移動
+  (local-set-key (kbd "<tab>") 'dired-subtree-insert)   ; サブツリーを見やすく開く(org-modeと揃える)
+  (local-set-key (kbd "h")     'dired-subtree-remove)   ; サブツリーを隠す
+  (local-set-key (kbd "r")     'wdired-change-to-wdired-mode) ; ファイル名編集
+))
 
 ;; モードラインのカスタマイズ
 ;; https://qiita.com/kai2nenobu/items/ddf94c0e5a36919bc6db

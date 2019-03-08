@@ -1,8 +1,6 @@
 (ido-mode t)
 (setq ido-enable-flex-matching t)
 (menu-bar-mode -1)
-; (tool-bar-mode -1)
-; (scroll-bar-mode -1)
 (show-paren-mode 1)
 (column-number-mode t)
 (global-hl-line-mode)
@@ -102,4 +100,18 @@
 
 (setq ruby-insert-encoding-magic-comment nil)
 (setq ruby-deep-indent-paren-style nil)
+
+; for emacs cocoa
+(menu-bar-mode t)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(global-set-key (kbd "s-f") 'find-file)                    ; C-x C-f
+(global-set-key (kbd "s-b") 'switch-to-buffer)             ; C-x b
+(global-set-key (kbd "s-0") 'delete-window)                ; C-x 0
+(global-set-key (kbd "s-1") 'delete-other-windows)         ; C-x 1
+(global-set-key (kbd "s-2") 'split-window-vertically)      ; C-x 2
+(global-set-key (kbd "s-3") 'split-window-horizontally)    ; C-x 3
+(global-set-key (kbd "s-t") 'make-frame-command)           ; C-x 5 2
+(global-set-key (kbd "s-D") 'split-window-vertically)      ; iterm と同じ
+(global-set-key (kbd "s-d") 'split-window-horizontally)    ; iterm と同じ
 

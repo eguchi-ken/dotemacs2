@@ -99,3 +99,7 @@
 (setq-default mode-line-mule-info
               (cl-substitute '(:eval (my-buffer-coding-system-mnemonic))
                              "%z" mode-line-mule-info :test 'equal))
+
+(setq ruby-insert-encoding-magic-comment nil)
+(setq ruby-deep-indent-paren-style nil)
+

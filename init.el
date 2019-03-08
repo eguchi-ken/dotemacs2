@@ -52,6 +52,7 @@
 (key-chord-define-global "fd" 'find-file)
 (key-chord-define-global "gh" 'magit-status)
 (key-chord-define-global "sd" 'save-buffer)
+(key-chord-define-global "rt" 'recentf-open-files)
 
 (load-theme 'rebecca t)
 

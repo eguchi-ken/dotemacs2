@@ -100,6 +100,8 @@
 
 (setq ruby-insert-encoding-magic-comment nil)
 (setq ruby-deep-indent-paren-style nil)
+(add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\Gemfile$" . ruby-mode))
 
 ; for emacs cocoa
 (menu-bar-mode t)

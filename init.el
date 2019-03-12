@@ -37,7 +37,7 @@
 (global-set-key (kbd "C-c l") 'toggle-truncate-lines)      ; 行末で折り返す <-> 折り返さない
 (global-set-key (kbd "C-c t") 'recentf-open-files)
 
-(set-face-attribute 'default nil :family "Ricty Diminished" :height 180)
+(set-face-attribute 'default nil :family "Ricty" :height 170)
 (fset 'yes-or-no-p 'y-or-n-p) ; yes or no の質問を y, n で答えられるようにする
 
 (package-initialize)

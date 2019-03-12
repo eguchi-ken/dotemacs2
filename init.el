@@ -37,6 +37,7 @@
 (global-set-key (kbd "C-c l") 'toggle-truncate-lines)      ; 行末で折り返す <-> 折り返さない
 (global-set-key (kbd "C-c t") 'recentf-open-files)
 
+(set-face-attribute 'default nil :family "Ricty Diminished" :height 180)
 (package-initialize)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-refresh-contents)

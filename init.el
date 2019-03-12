@@ -38,6 +38,8 @@
 (global-set-key (kbd "C-c t") 'recentf-open-files)
 
 (set-face-attribute 'default nil :family "Ricty Diminished" :height 180)
+(fset 'yes-or-no-p 'y-or-n-p) ; yes or no の質問を y, n で答えられるようにする
+
 (package-initialize)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-refresh-contents)

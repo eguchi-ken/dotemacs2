@@ -40,7 +40,7 @@
 (package-initialize)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-refresh-contents)
-(defvar my/favorite-packages '(magit key-chord rebecca-theme wdired slim-mode))
+(defvar my/favorite-packages '(magit key-chord rebecca-theme wdired slim-mode wgrep))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
     (package-install package)))
@@ -63,6 +63,10 @@
   (local-set-key (kbd "h")     'dired-subtree-remove)   ; サブツリーを隠す
   (local-set-key (kbd "r")     'wdired-change-to-wdired-mode) ; ファイル名編集
 ))
+
+(require 'wgrep)
+(setf wgrep-enable-key "r")
+(setq wgrep-auto-save-buffer t)
 
 ;; モードラインのカスタマイズ
 ;; https://qiita.com/kai2nenobu/items/ddf94c0e5a36919bc6db

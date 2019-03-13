@@ -81,6 +81,7 @@
 (projectile-mode +1)
 
 (require 'dashboard)
+(setq dashboard-items '((recents  . 10) (projects . 10) (bookmarks . 5)))
 (dashboard-setup-startup-hook)
 
 (require 'auto-complete)

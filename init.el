@@ -40,6 +40,7 @@
 (global-set-key (kbd "C-c t") 'recentf-open-files)
 
 (set-face-attribute 'default nil :family "Ricty" :height 170)
+(set-fontset-font t 'japanese-jisx0208 (font-spec :family "Ricty")) ; これがないと一部の漢字のフォントがおかしくなる
 (fset 'yes-or-no-p 'y-or-n-p) ; yes or no の質問を y, n で答えられるようにする
 
 (package-initialize)

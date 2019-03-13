@@ -46,7 +46,7 @@
 (package-initialize)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-refresh-contents)
-(defvar my/favorite-packages '(magit key-chord rebecca-theme wdired slim-mode wgrep dashboard projectile))
+(defvar my/favorite-packages '(magit key-chord rebecca-theme wdired slim-mode coffee-mode wgrep dashboard projectile))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
     (package-install package)))

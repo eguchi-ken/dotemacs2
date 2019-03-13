@@ -1,6 +1,7 @@
 (ido-mode t)
 (setq ido-enable-flex-matching t)
-(setq ido-use-filename-at-point 'guess)
+(setq ido-use-filename-at-point 'guess) ; find-file の時 path にカーソルが当たってたらそれを開く
+(setq ido-use-url-at-point t)  ; find-file の時 url にカーソルが当たってたらそれを開く
 (menu-bar-mode -1)
 (show-paren-mode 1)
 (column-number-mode t)

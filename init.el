@@ -43,7 +43,7 @@
 (package-initialize)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-refresh-contents)
-(defvar my/favorite-packages '(magit key-chord rebecca-theme wdired slim-mode wgrep))
+(defvar my/favorite-packages '(magit key-chord rebecca-theme wdired slim-mode wgrep dashboard))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
     (package-install package)))
@@ -70,6 +70,9 @@
 (require 'wgrep)
 (setf wgrep-enable-key "r")
 (setq wgrep-auto-save-buffer t)
+
+(require 'dashboard)
+(dashboard-setup-startup-hook)
 
 ;; モードラインのカスタマイズ
 ;; https://qiita.com/kai2nenobu/items/ddf94c0e5a36919bc6db

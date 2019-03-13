@@ -44,7 +44,7 @@
 (package-initialize)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-refresh-contents)
-(defvar my/favorite-packages '(magit key-chord rebecca-theme wdired slim-mode wgrep dashboard))
+(defvar my/favorite-packages '(magit key-chord rebecca-theme wdired slim-mode wgrep dashboard projectile))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
     (package-install package)))
@@ -71,6 +71,12 @@
 (require 'wgrep)
 (setf wgrep-enable-key "r")
 (setq wgrep-auto-save-buffer t)
+
+(require 'projectile)
+(setq projectile-project-search-path '("~/work/"))
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(projectile-mode +1)
 
 (require 'dashboard)
 (dashboard-setup-startup-hook)

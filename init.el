@@ -46,7 +46,7 @@
 (package-initialize)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-refresh-contents)
-(defvar my/favorite-packages '(magit key-chord rebecca-theme wdired slim-mode coffee-mode wgrep dashboard projectile))
+(defvar my/favorite-packages '(magit key-chord rebecca-theme wdired slim-mode coffee-mode wgrep dashboard projectile auto-complete))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
     (package-install package)))
@@ -82,6 +82,14 @@
 
 (require 'dashboard)
 (dashboard-setup-startup-hook)
+
+(require 'auto-complete)
+(require 'auto-complete-config)
+(define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+(global-auto-complete-mode t)
+(ac-config-default)
+(setq ac-ignore-case nil) ; auto-complete で大文字小文字を区別する。
+(setq ac-auto-start 4)
 
 ;; モードラインのカスタマイズ
 ;; https://qiita.com/kai2nenobu/items/ddf94c0e5a36919bc6db

@@ -46,7 +46,7 @@
 (package-initialize)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-refresh-contents)
-(defvar my/favorite-packages '(magit key-chord rebecca-theme wdired slim-mode coffee-mode wgrep dashboard projectile auto-complete))
+(defvar my/favorite-packages '(magit key-chord rebecca-theme wdired slim-mode coffee-mode wgrep dashboard projectile auto-complete idomenu ido-vertical-mode))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
     (package-install package)))
@@ -91,6 +91,17 @@
 (ac-config-default)
 (setq ac-ignore-case nil) ; auto-complete で大文字小文字を区別する。
 (setq ac-auto-start 4)
+
+(setq ido-max-window-height 0.75)
+(setq ido-vertical-define-keys 'C-n-C-p-up-and-down)
+(ido-vertical-mode 1)
+(global-set-key (kbd "M-i") 'idomenu)
+
+(defun coffee-custom ()
+    "coffee-mode-hook"
+    (set (make-local-variable 'tab-width) 2)
+    (setq coffee-tab-width 2))
+(add-hook 'coffee-mode-hook '(lambda() (coffee-custom)))
 
 ;; モードラインのカスタマイズ
 ;; https://qiita.com/kai2nenobu/items/ddf94c0e5a36919bc6db

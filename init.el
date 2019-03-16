@@ -1,5 +1,7 @@
 (ido-mode t)
 (setq ido-enable-flex-matching t)
+(setq ido-use-filename-at-point 'guess) ; find-file の時 path にカーソルが当たってたらそれを開く
+(setq ido-use-url-at-point t)  ; find-file の時 url にカーソルが当たってたらそれを開く
 (menu-bar-mode -1)
 (show-paren-mode 1)
 (column-number-mode t)
@@ -37,10 +39,14 @@
 (global-set-key (kbd "C-c l") 'toggle-truncate-lines)      ; 行末で折り返す <-> 折り返さない
 (global-set-key (kbd "C-c t") 'recentf-open-files)
 
+(set-face-attribute 'default nil :family "Ricty" :height 170)
+(set-fontset-font t 'japanese-jisx0208 (font-spec :family "Ricty")) ; これがないと一部の漢字のフォントがおかしくなる
+(fset 'yes-or-no-p 'y-or-n-p) ; yes or no の質問を y, n で答えられるようにする
+
 (package-initialize)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-refresh-contents)
-(defvar my/favorite-packages '(magit key-chord rebecca-theme wdired))
+(defvar my/favorite-packages '(magit key-chord rebecca-theme wdired slim-mode coffee-mode wgrep dashboard projectile auto-complete idomenu ido-vertical-mode))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
     (package-install package)))
@@ -63,6 +69,39 @@
   (local-set-key (kbd "h")     'dired-subtree-remove)   ; サブツリーを隠す
   (local-set-key (kbd "r")     'wdired-change-to-wdired-mode) ; ファイル名編集
 ))
+
+(require 'wgrep)
+(setf wgrep-enable-key "r")
+(setq wgrep-auto-save-buffer t)
+
+(require 'projectile)
+(setq projectile-project-search-path '("~/work/"))
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(projectile-mode +1)
+
+(require 'dashboard)
+(setq dashboard-items '((recents  . 10) (projects . 10) (bookmarks . 5)))
+(dashboard-setup-startup-hook)
+
+(require 'auto-complete)
+(require 'auto-complete-config)
+(define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+(global-auto-complete-mode t)
+(ac-config-default)
+(setq ac-ignore-case nil) ; auto-complete で大文字小文字を区別する。
+(setq ac-auto-start 4)
+
+(setq ido-max-window-height 0.75)
+(setq ido-vertical-define-keys 'C-n-C-p-up-and-down)
+(ido-vertical-mode 1)
+(global-set-key (kbd "M-i") 'idomenu)
+
+(defun coffee-custom ()
+    "coffee-mode-hook"
+    (set (make-local-variable 'tab-width) 2)
+    (setq coffee-tab-width 2))
+(add-hook 'coffee-mode-hook '(lambda() (coffee-custom)))
 
 ;; モードラインのカスタマイズ
 ;; https://qiita.com/kai2nenobu/items/ddf94c0e5a36919bc6db

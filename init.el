@@ -143,6 +143,11 @@
 (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\Gemfile$" . ruby-mode))
 
+(defun insert-current-date () (interactive)
+       (insert
+        (shell-command-to-string "echo -n $(LANG=ja_JP date +'%Y/%m/%d (%a)')")))
+(key-chord-define-global "id" 'insert-current-date)
+
 ; for emacs cocoa
 (menu-bar-mode t)
 (tool-bar-mode -1)

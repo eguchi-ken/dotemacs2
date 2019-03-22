@@ -46,7 +46,7 @@
 (package-initialize)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-refresh-contents)
-(defvar my/favorite-packages '(magit key-chord rebecca-theme wdired slim-mode coffee-mode wgrep dashboard projectile auto-complete idomenu ido-vertical-mode))
+(defvar my/favorite-packages '(magit key-chord rebecca-theme wdired slim-mode coffee-mode wgrep dashboard projectile auto-complete idomenu ido-vertical-mode rubocop rbenv))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
     (package-install package)))
@@ -142,11 +142,13 @@
 (setq ruby-deep-indent-paren-style nil)
 (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\Gemfile$" . ruby-mode))
+(add-hook 'ruby-mode-hook #'rubocop-mode)
 
 (defun insert-current-date () (interactive)
        (insert
         (shell-command-to-string "echo -n $(LANG=ja_JP date +'%Y/%m/%d (%a)')")))
 (key-chord-define-global "id" 'insert-current-date)
+
 
 ; for emacs cocoa
 (menu-bar-mode t)

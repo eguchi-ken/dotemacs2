@@ -57,6 +57,7 @@
 (key-chord-define-global "gh" 'magit-status)
 (key-chord-define-global "sd" 'save-buffer)
 (key-chord-define-global "rt" 'recentf-open-files)
+(key-chord-define-global "bm" 'bookmark-jump)
 
 (load-theme 'rebecca t)
 

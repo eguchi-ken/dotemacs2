@@ -3,6 +3,7 @@
 (setq ido-use-filename-at-point 'guess) ; find-file の時 path にカーソルが当たってたらそれを開く
 (setq ido-use-url-at-point t)  ; find-file の時 url にカーソルが当たってたらそれを開く
 (setq ido-auto-merge-work-directories-length -1) ; マッチするものがない時に、自動で recentf を検索しない
+(ido-everywhere t)
 (menu-bar-mode -1)
 (show-paren-mode 1)
 (column-number-mode t)
@@ -26,6 +27,13 @@
 (setq recentf-exclude '("/recentf" "COMMIT_EDITMSG" "/.?TAGS" "^/sudo:" "/\\.emacs\\.d/games/*-scores" "/\\.emacs\\.d/\\.cask/"))
 (setq recentf-auto-save-timer (run-with-idle-timer 30 t 'recentf-save-list))
 (recentf-mode 1)
+; https://www.emacswiki.org/emacs/RecentFiles#toc8
+(defun recentf-ido-find-file ()
+  "Find a recent file using Ido."
+  (interactive)
+  (let ((file (ido-completing-read "Choose recent file: " recentf-list nil t)))
+    (when file
+      (find-file file))))
 
 (add-hook 'org-mode-hook (lambda ()
   (setq org-hide-leading-stars t)
@@ -38,7 +46,7 @@
 (global-set-key (kbd "C-t") 'other-window)
 (global-set-key (kbd "C-x SPC") 'cua-rectangle-mark-mode)  ; 矩形選択/入力
 (global-set-key (kbd "C-c l") 'toggle-truncate-lines)      ; 行末で折り返す <-> 折り返さない
-(global-set-key (kbd "C-c t") 'recentf-open-files)
+(global-set-key (kbd "C-c t") 'recentf-ido-find-file)
 
 (set-face-attribute 'default nil :family "Ricty" :height 170)
 (set-fontset-font t 'japanese-jisx0208 (font-spec :family "Ricty")) ; これがないと一部の漢字のフォントがおかしくなる
@@ -57,7 +65,7 @@
 (key-chord-define-global "fd" 'find-file)
 (key-chord-define-global "gh" 'magit-status)
 (key-chord-define-global "sd" 'save-buffer)
-(key-chord-define-global "rt" 'recentf-open-files)
+(key-chord-define-global "rt" 'recentf-ido-find-file)
 (key-chord-define-global "bm" 'bookmark-jump)
 
 (load-theme 'rebecca t)

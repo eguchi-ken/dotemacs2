@@ -71,6 +71,7 @@
 (load-theme 'rebecca t)
 
 (require 'wdired)         ; Dired バッファの上でファイル名をリネームできるようにする
+(setq dired-dwim-target t) ; 2個のdiredバッファがある時、コピー/移動先のパスを他方のバッファにする
 (add-hook 'dired-mode-hook (lambda ()
   (local-unset-key (kbd "C-t"))                         ; 普段の C-t をそのまま
   (local-set-key (kbd "j")     'dired-next-line)        ; vim のような上下移動

@@ -55,15 +55,10 @@
 (package-initialize)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-refresh-contents)
-(defvar my/favorite-packages '(use-package magit magithub key-chord rebecca-theme wdired slim-mode coffee-mode wgrep dashboard projectile auto-complete idomenu ido-vertical-mode rubocop rbenv yasnippet))
+(defvar my/favorite-packages '(use-package magit key-chord rebecca-theme wdired slim-mode coffee-mode wgrep dashboard projectile auto-complete idomenu ido-vertical-mode rubocop rbenv yasnippet))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
     (package-install package)))
-
-(use-package magithub
-  :after magit
-  :ensure t
-  :config (magithub-feature-autoinject t))
 
 (setq key-chord-two-keys-delay 0.04)
 (key-chord-mode 1)
@@ -180,8 +175,6 @@
         (insert filename)
         (clipboard-kill-region (point-min) (point-max)))
       (message filename))))
-
-
 
 ; for emacs cocoa
 (menu-bar-mode t)

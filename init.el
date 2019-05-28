@@ -175,6 +175,7 @@
         (insert filename)
         (clipboard-kill-region (point-min) (point-max)))
       (message filename))))
+(key-chord-define-global "fp" 'file-full-path)
 
 ; for emacs cocoa
 (menu-bar-mode t)

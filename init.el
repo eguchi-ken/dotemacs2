@@ -21,6 +21,10 @@
 (setq backup-directory-alist `((".*". ,temporary-file-directory)))
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+; 長い行（とくに整形されてないjson等の表示）の処理が非常に重いためそれを軽減する
+; https://emacs.stackexchange.com/questions/598/how-do-i-prevent-extremely-long-lines-making-emacs-slow/601
+(setq-default bidi-display-reordering nil)
+
 ; https://qiita.com/tadsan/items/68b53c2b0e8bb87a78d7
 (setq recentf-max-saved-items 2000) ;; 2000ファイルまで履歴保存する
 (setq recentf-auto-cleanup 'never)  ;; 存在しないファイルは消さない

@@ -163,9 +163,14 @@
 (setq yas-prompt-functions '(yas-ido-prompt))
 (key-chord-define-global "y7" 'yas-insert-snippet)
 
-(defun insert-current-date () (interactive)
-       (insert
-        (shell-command-to-string "echo -n $(LANG=ja_JP date +'%Y/%m/%d (%a)')")))
+(defun insert-current-date (&optional diff)
+  "日にちをカレントバッファに出力します"
+  (interactive "P")
+    (insert
+     (shell-command-to-string
+      (format
+       "echo -n $(LANG=ja_JP date -v-%dd +'%%Y/%%m/%%d (%%a)')"
+       (or diff 0)))))
 (key-chord-define-global "id" 'insert-current-date)
 
 ;; 今開いているファイルのフルパスを得る。dired バッファは NG

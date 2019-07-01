@@ -30,6 +30,16 @@
 (setq recentf-auto-cleanup 'never)  ;; 存在しないファイルは消さない
 (setq recentf-exclude '("/recentf" "COMMIT_EDITMSG" "/.?TAGS" "^/sudo:" "/\\.emacs\\.d/games/*-scores" "/\\.emacs\\.d/\\.cask/"))
 (setq recentf-auto-save-timer (run-with-idle-timer 30 t 'recentf-save-list))
+;; http://garin.jp/2017/09/09/2017-09-09-143435.html
+;; recentf の メッセージをエコーエリア(ミニバッファ)に表示しない
+;; (*Messages* バッファには出力される)
+(defun recentf-save-list-inhibit-message:around (orig-func &rest args)
+  (setq inhibit-message t)
+  (apply orig-func args)
+  (setq inhibit-message nil)
+  'around)
+(advice-add 'recentf-cleanup   :around 'recentf-save-list-inhibit-message:around)
+(advice-add 'recentf-save-list :around 'recentf-save-list-inhibit-message:around)
 (recentf-mode 1)
 ; https://www.emacswiki.org/emacs/RecentFiles#toc8
 (defun recentf-ido-find-file ()

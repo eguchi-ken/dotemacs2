@@ -109,7 +109,7 @@
 (setq wgrep-auto-save-buffer t)
 
 (require 'projectile)
-(setq projectile-project-search-path '("~/work/"))
+(setq projectile-project-search-path '("~/"))
 (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (projectile-mode +1)

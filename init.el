@@ -30,6 +30,8 @@
 (setq recentf-auto-cleanup 'never)  ;; 存在しないファイルは消さない
 (setq recentf-exclude '("/recentf" "COMMIT_EDITMSG" "/.?TAGS" "^/sudo:" "/\\.emacs\\.d/games/*-scores" "/\\.emacs\\.d/\\.cask/"))
 (setq recentf-auto-save-timer (run-with-idle-timer 30 t 'recentf-save-list))
+(recentf-mode 1)
+
 ;; http://garin.jp/2017/09/09/2017-09-09-143435.html
 ;; recentf の メッセージをエコーエリア(ミニバッファ)に表示しない
 ;; (*Messages* バッファには出力される)
@@ -87,6 +89,7 @@
 
 (require 'wdired)         ; Dired バッファの上でファイル名をリネームできるようにする
 (setq dired-dwim-target t) ; 2個のdiredバッファがある時、コピー/移動先のパスを他方のバッファにする
+
 (add-hook 'dired-mode-hook (lambda ()
   (local-unset-key (kbd "C-t"))                         ; 普段の C-t をそのまま
   (local-set-key (kbd "j")     'dired-next-line)        ; vim のような上下移動
@@ -213,4 +216,3 @@
 
 (use-package forge
   :after magit)
-

@@ -25,6 +25,10 @@
 ; https://emacs.stackexchange.com/questions/598/how-do-i-prevent-extremely-long-lines-making-emacs-slow/601
 (setq-default bidi-display-reordering nil)
 
+; 日本語入力時のちらつきを防止する
+;; http://hylom.net/emacs-25.1-ime-flicker-problem
+(setq redisplay-dont-pause nil)
+
 ; https://qiita.com/tadsan/items/68b53c2b0e8bb87a78d7
 (setq recentf-max-saved-items 2000) ;; 2000ファイルまで履歴保存する
 (setq recentf-auto-cleanup 'never)  ;; 存在しないファイルは消さない

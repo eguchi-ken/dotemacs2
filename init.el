@@ -2,6 +2,8 @@
 (setq ido-enable-flex-matching t)
 (setq ido-use-filename-at-point 'guess) ; find-file の時 path にカーソルが当たってたらそれを開く
 (setq ido-use-url-at-point t)  ; find-file の時 url にカーソルが当たってたらそれを開く
+(setq ido-auto-merge-work-directories-length -1) ; マッチするものがない時に、自動で recentf を検索しない
+(ido-everywhere t)
 (menu-bar-mode -1)
 (show-paren-mode 1)
 (column-number-mode t)
@@ -19,12 +21,35 @@
 (setq backup-directory-alist `((".*". ,temporary-file-directory)))
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+; 長い行（とくに整形されてないjson等の表示）の処理が非常に重いためそれを軽減する
+; https://emacs.stackexchange.com/questions/598/how-do-i-prevent-extremely-long-lines-making-emacs-slow/601
+(setq-default bidi-display-reordering nil)
+
 ; https://qiita.com/tadsan/items/68b53c2b0e8bb87a78d7
 (setq recentf-max-saved-items 2000) ;; 2000ファイルまで履歴保存する
 (setq recentf-auto-cleanup 'never)  ;; 存在しないファイルは消さない
 (setq recentf-exclude '("/recentf" "COMMIT_EDITMSG" "/.?TAGS" "^/sudo:" "/\\.emacs\\.d/games/*-scores" "/\\.emacs\\.d/\\.cask/"))
 (setq recentf-auto-save-timer (run-with-idle-timer 30 t 'recentf-save-list))
 (recentf-mode 1)
+
+;; http://garin.jp/2017/09/09/2017-09-09-143435.html
+;; recentf の メッセージをエコーエリア(ミニバッファ)に表示しない
+;; (*Messages* バッファには出力される)
+(defun recentf-save-list-inhibit-message:around (orig-func &rest args)
+  (setq inhibit-message t)
+  (apply orig-func args)
+  (setq inhibit-message nil)
+  'around)
+(advice-add 'recentf-cleanup   :around 'recentf-save-list-inhibit-message:around)
+(advice-add 'recentf-save-list :around 'recentf-save-list-inhibit-message:around)
+(recentf-mode 1)
+; https://www.emacswiki.org/emacs/RecentFiles#toc8
+(defun recentf-ido-find-file ()
+  "Find a recent file using Ido."
+  (interactive)
+  (let ((file (ido-completing-read "Choose recent file: " recentf-list nil t)))
+    (when file
+      (find-file file))))
 
 (add-hook 'org-mode-hook (lambda ()
   (setq org-hide-leading-stars t)
@@ -37,7 +62,7 @@
 (global-set-key (kbd "C-t") 'other-window)
 (global-set-key (kbd "C-x SPC") 'cua-rectangle-mark-mode)  ; 矩形選択/入力
 (global-set-key (kbd "C-c l") 'toggle-truncate-lines)      ; 行末で折り返す <-> 折り返さない
-(global-set-key (kbd "C-c t") 'recentf-open-files)
+(global-set-key (kbd "C-c t") 'recentf-ido-find-file)
 
 (set-face-attribute 'default nil :family "Ricty" :height 170)
 (set-fontset-font t 'japanese-jisx0208 (font-spec :family "Ricty")) ; これがないと一部の漢字のフォントがおかしくなる
@@ -45,8 +70,9 @@
 
 (package-initialize)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-refresh-contents)
-(defvar my/favorite-packages '(magit key-chord rebecca-theme wdired slim-mode coffee-mode wgrep dashboard projectile auto-complete idomenu ido-vertical-mode))
+(defvar my/favorite-packages '(use-package magit key-chord rebecca-theme wdired slim-mode coffee-mode wgrep dashboard projectile auto-complete idomenu ido-vertical-mode rubocop rbenv yasnippet dumb-jump dired-subtree))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
     (package-install package)))
@@ -56,11 +82,14 @@
 (key-chord-define-global "fd" 'find-file)
 (key-chord-define-global "gh" 'magit-status)
 (key-chord-define-global "sd" 'save-buffer)
-(key-chord-define-global "rt" 'recentf-open-files)
+(key-chord-define-global "rt" 'recentf-ido-find-file)
+(key-chord-define-global "bm" 'bookmark-jump)
 
 (load-theme 'rebecca t)
 
 (require 'wdired)         ; Dired バッファの上でファイル名をリネームできるようにする
+(setq dired-dwim-target t) ; 2個のdiredバッファがある時、コピー/移動先のパスを他方のバッファにする
+
 (add-hook 'dired-mode-hook (lambda ()
   (local-unset-key (kbd "C-t"))                         ; 普段の C-t をそのまま
   (local-set-key (kbd "j")     'dired-next-line)        ; vim のような上下移動
@@ -141,6 +170,35 @@
 (setq ruby-deep-indent-paren-style nil)
 (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\Gemfile$" . ruby-mode))
+(add-hook 'ruby-mode-hook #'rubocop-mode)
+
+(yas-global-mode 1)
+(setq yas-prompt-functions '(yas-ido-prompt))
+(key-chord-define-global "y7" 'yas-insert-snippet)
+
+(defun insert-current-date (&optional diff)
+  "日にちをカレントバッファに出力します"
+  (interactive "P")
+    (insert
+     (shell-command-to-string
+      (format
+       "echo -n $(LANG=ja_JP date -v-%dd +'%%Y/%%m/%%d (%%a)')"
+       (or diff 0)))))
+(key-chord-define-global "id" 'insert-current-date)
+
+;; 今開いているファイルのフルパスを得る。dired バッファは NG
+(defun file-full-path ()
+  "Put the current file name on the clipboard"
+  (interactive)
+  (let ((filename (if (equal major-mode 'dired-mode)
+                      default-directory
+                    (buffer-file-name))))
+    (when filename
+      (with-temp-buffer
+        (insert filename)
+        (clipboard-kill-region (point-min) (point-max)))
+      (message filename))))
+(key-chord-define-global "fp" 'file-full-path)
 
 ; for emacs cocoa
 (menu-bar-mode t)
@@ -156,3 +214,5 @@
 (global-set-key (kbd "s-D") 'split-window-vertically)      ; iterm と同じ
 (global-set-key (kbd "s-d") 'split-window-horizontally)    ; iterm と同じ
 
+(use-package forge
+  :after magit)

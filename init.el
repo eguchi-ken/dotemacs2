@@ -221,5 +221,8 @@
 
 (key-chord-define-global "dj" 'dumb-jump-go)
 
+; https://github.com/senny/rbenv.el
+(global-rbenv-mode)
+
 (use-package forge
   :after magit)

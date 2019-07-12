@@ -219,5 +219,7 @@
 (global-set-key (kbd "s-D") 'split-window-vertically)      ; iterm と同じ
 (global-set-key (kbd "s-d") 'split-window-horizontally)    ; iterm と同じ
 
+(key-chord-define-global "dj" 'dumb-jump-go)
+
 (use-package forge
   :after magit)

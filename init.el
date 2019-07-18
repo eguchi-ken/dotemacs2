@@ -77,7 +77,7 @@
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-refresh-contents)
-(defvar my/favorite-packages '(use-package magit key-chord rebecca-theme wdired slim-mode coffee-mode wgrep dashboard projectile auto-complete idomenu ido-vertical-mode rubocop rbenv yasnippet dumb-jump dired-subtree))
+(defvar my/favorite-packages '(use-package magit key-chord rebecca-theme wdired slim-mode coffee-mode wgrep dashboard projectile auto-complete idomenu ido-vertical-mode rubocop rbenv yasnippet dumb-jump dired-subtree exec-path-from-shell rspec-mode direnv))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
     (package-install package)))
@@ -226,3 +226,11 @@
 
 (use-package forge
   :after magit)
+(use-package direnv
+ :config
+ (direnv-mode))
+
+; https://github.com/purcell/exec-path-from-shell
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+

@@ -82,14 +82,6 @@
   (unless (package-installed-p package)
     (package-install package)))
 
-(setq key-chord-two-keys-delay 0.04)
-(key-chord-mode 1)
-(key-chord-define-global "fd" 'find-file)
-(key-chord-define-global "gh" 'magit-status)
-(key-chord-define-global "sd" 'save-buffer)
-(key-chord-define-global "rt" 'recentf-ido-find-file)
-(key-chord-define-global "bm" 'bookmark-jump)
-
 (load-theme 'rebecca t)
 
 (require 'wdired)         ; Dired バッファの上でファイル名をリネームできるようにする
@@ -179,7 +171,6 @@
 
 (yas-global-mode 1)
 (setq yas-prompt-functions '(yas-ido-prompt))
-(key-chord-define-global "y7" 'yas-insert-snippet)
 
 (defun insert-current-date (&optional diff)
   "日にちをカレントバッファに出力します"
@@ -189,7 +180,6 @@
       (format
        "echo -n $(LANG=ja_JP date -v-%dd +'%%Y/%%m/%%d (%%a)')"
        (or diff 0)))))
-(key-chord-define-global "id" 'insert-current-date)
 
 ;; 今開いているファイルのフルパスを得る。dired バッファは NG
 (defun file-full-path ()
@@ -203,7 +193,6 @@
         (insert filename)
         (clipboard-kill-region (point-min) (point-max)))
       (message filename))))
-(key-chord-define-global "fp" 'file-full-path)
 
 ; for emacs cocoa
 (menu-bar-mode t)
@@ -219,8 +208,6 @@
 (global-set-key (kbd "s-D") 'split-window-vertically)      ; iterm と同じ
 (global-set-key (kbd "s-d") 'split-window-horizontally)    ; iterm と同じ
 
-(key-chord-define-global "dj" 'dumb-jump-go)
-
 ; https://github.com/senny/rbenv.el
 (global-rbenv-mode)
 
@@ -229,6 +216,21 @@
 (use-package direnv
  :config
  (direnv-mode))
+
+(use-package key-chord
+  :config
+  (setq key-chord-two-keys-delay 0.04)
+  (key-chord-mode 1)
+  (key-chord-define-global "fd" 'find-file)
+  (key-chord-define-global "gh" 'magit-status)
+  (key-chord-define-global "sd" 'save-buffer)
+  (key-chord-define-global "rt" 'recentf-ido-find-file)
+  (key-chord-define-global "bm" 'bookmark-jump)
+  (key-chord-define-global "dj" 'dumb-jump-go)
+  (key-chord-define-global "y7" 'yas-insert-snippet)
+  (key-chord-define-global "id" 'insert-current-date)
+  (key-chord-define-global "fp" 'file-full-path)
+)
 
 ; https://github.com/purcell/exec-path-from-shell
 (when (memq window-system '(mac ns x))

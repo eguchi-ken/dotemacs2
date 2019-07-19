@@ -81,8 +81,8 @@
   '(auto-complete idomenu ido-vertical-mode rubocop
     exec-path-from-shell rspec-mode direnv
     rbenv yasnippet dumb-jump dired-subtree
-    slim-mode coffee-mode wgrep dashboard projectile
-    use-package magit key-chord rebecca-theme wdired))
+    slim-mode coffee-mode wgrep dashboard paradox
+    projectile use-package magit key-chord rebecca-theme wdired))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
     (package-install package)))
@@ -246,6 +246,11 @@
   (key-chord-define-global "id" 'insert-current-date)
   (key-chord-define-global "fp" 'file-full-path)
 )
+
+(use-package paradox
+ :ensure t
+ :custom
+ (paradox-github-token t))
 
 ; https://github.com/purcell/exec-path-from-shell
 (when (memq window-system '(mac ns x))

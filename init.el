@@ -84,7 +84,7 @@
 
 (load-theme 'rebecca t)
 
-(require 'wdired)         ; Dired バッファの上でファイル名をリネームできるようにする
+(use-package wdired)         ; Dired バッファの上でファイル名をリネームできるようにする
 (setq dired-dwim-target t) ; 2個のdiredバッファがある時、コピー/移動先のパスを他方のバッファにする
 
 (add-hook 'dired-mode-hook (lambda ()
@@ -96,27 +96,35 @@
   (local-set-key (kbd "r")     'wdired-change-to-wdired-mode) ; ファイル名編集
 ))
 
-(require 'wgrep)
-(setf wgrep-enable-key "r")
-(setq wgrep-auto-save-buffer t)
+(use-package wgrep
+  :config
+  (setf wgrep-enable-key "r")
+  (setq wgrep-auto-save-buffer t)
+)
 
-(require 'projectile)
-(setq projectile-project-search-path '("~/"))
-(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-(projectile-mode +1)
+(use-package projectile
+  :config
+  (setq projectile-project-search-path '("~/"))
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (projectile-mode +1)
+)
 
-(require 'dashboard)
-(setq dashboard-items '((recents  . 10) (projects . 10) (bookmarks . 5)))
-(dashboard-setup-startup-hook)
+(use-package dashboard
+  :config
+  (setq dashboard-items '((recents  . 10) (projects . 10) (bookmarks . 5)))
+  (dashboard-setup-startup-hook)
+)
 
-(require 'auto-complete)
-(require 'auto-complete-config)
-(define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
-(global-auto-complete-mode t)
-(ac-config-default)
-(setq ac-ignore-case nil) ; auto-complete で大文字小文字を区別する。
-(setq ac-auto-start 4)
+(use-package auto-complete)
+(use-package auto-complete-config
+  :config
+  (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+  (global-auto-complete-mode t)
+  (ac-config-default)
+  (setq ac-ignore-case nil) ; auto-complete で大文字小文字を区別する。
+  (setq ac-auto-start 4)
+)
 
 (setq ido-max-window-height 0.75)
 (setq ido-vertical-define-keys 'C-n-C-p-up-and-down)

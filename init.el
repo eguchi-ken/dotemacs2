@@ -16,7 +16,6 @@
 (setq x-select-enable-primary t)
 (setq save-interprogram-paste-before-kill t)
 (setq require-final-newline t)
-(setq visible-bell t)
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 (setq backup-directory-alist `((".*". ,temporary-file-directory)))
 (add-hook 'before-save-hook 'delete-trailing-whitespace)

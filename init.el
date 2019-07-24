@@ -150,7 +150,11 @@
 (setq ruby-deep-indent-paren-style nil)
 (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\Gemfile$" . ruby-mode))
-(add-hook 'ruby-mode-hook #'rubocop-mode)
+
+(add-hook 'ruby-mode-hook '(lambda()
+  (rubocop-mode)
+  (local-set-key (kbd "C-c , R") 'rubocop-autocorrect-current-file)
+))
 
 (yas-global-mode 1)
 (setq yas-prompt-functions '(yas-ido-prompt))
@@ -257,4 +261,3 @@
 ; https://github.com/purcell/exec-path-from-shell
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
-

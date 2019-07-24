@@ -80,7 +80,8 @@
   '(auto-complete idomenu ido-vertical-mode rubocop
     exec-path-from-shell rspec-mode direnv
     rbenv yasnippet dumb-jump dired-subtree
-    slim-mode coffee-mode wgrep dashboard paradox
+    slim-mode string-inflection
+    coffee-mode wgrep dashboard paradox
     projectile use-package magit key-chord rebecca-theme wdired))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
@@ -245,6 +246,7 @@
   (key-chord-define-global "y7" 'yas-insert-snippet)
   (key-chord-define-global "id" 'insert-current-date)
   (key-chord-define-global "fp" 'file-full-path)
+  (key-chord-define-global "cy" 'string-inflection-cycle)
 )
 
 (use-package paradox

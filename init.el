@@ -156,6 +156,10 @@
   (local-set-key (kbd "C-c , R") 'rubocop-autocorrect-current-file)
 ))
 
+;; @see https://github.com/pezra/rspec-mode#debugging
+(add-hook 'after-init-hook 'inf-ruby-switch-setup)
+
+
 (yas-global-mode 1)
 (setq yas-prompt-functions '(yas-ido-prompt))
 

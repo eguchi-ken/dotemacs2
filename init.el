@@ -165,6 +165,8 @@
 
 ;; @see https://github.com/pezra/rspec-mode#debugging
 (add-hook 'after-init-hook 'inf-ruby-switch-setup)
+;; @see https://github.com/pezra/rspec-mode#auto-scrolling
+(setq compilation-scroll-output t)
 
 
 (yas-global-mode 1)

@@ -60,9 +60,15 @@
   (org-indent-mode t)              ; インデントをヘッダに合わせる。
   ))
 
+(defun other-window-back ()
+  (interactive)
+  (other-window -1)
+  )
+
 (keyboard-translate ?\C-h ?\C-?)                           ; C-h で delete を発行
 (global-set-key (kbd "M-h") 'backward-kill-word)
 (global-set-key (kbd "C-t") 'other-window)
+(global-set-key (kbd "M-t") 'other-window-back)
 (global-set-key (kbd "C-x SPC") 'cua-rectangle-mark-mode)  ; 矩形選択/入力
 (global-set-key (kbd "C-c l") 'toggle-truncate-lines)      ; 行末で折り返す <-> 折り返さない
 (global-set-key (kbd "C-c t") 'recentf-ido-find-file)

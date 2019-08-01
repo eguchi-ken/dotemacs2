@@ -1,3 +1,5 @@
+(setenv "SPEC_OPTS" "--format documentation")
+
 (ido-mode t)
 (setq ido-enable-flex-matching t)
 (setq ido-use-filename-at-point 'guess) ; find-file の時 path にカーソルが当たってたらそれを開く

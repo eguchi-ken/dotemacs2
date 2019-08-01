@@ -88,7 +88,8 @@
     rbenv yasnippet dumb-jump dired-subtree
     slim-mode string-inflection
     coffee-mode wgrep dashboard paradox
-    projectile use-package magit key-chord rebecca-theme wdired))
+    projectile projectile-rails
+    use-package magit key-chord rebecca-theme wdired))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
     (package-install package)))

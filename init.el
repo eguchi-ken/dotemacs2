@@ -58,6 +58,7 @@
 
 (add-hook 'org-mode-hook (lambda ()
   (setq org-hide-leading-stars t)
+  (setq org-indent-indentation-per-level 8)
   (local-unset-key (kbd "M-h"))    ; org-mode の M-h を利用しない。
   (org-indent-mode t)              ; インデントをヘッダに合わせる。
   ))
@@ -253,3 +254,10 @@
 ; https://github.com/purcell/exec-path-from-shell
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-level-1 ((t (:inherit nil :foreground "#ae81ff" :height 1.0))))
+ '(org-level-2 ((t (:inherit nil :foreground "#ccccff" :height 1.0)))))

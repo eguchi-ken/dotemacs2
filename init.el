@@ -93,8 +93,8 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-refresh-contents)
 (defvar my/favorite-packages
-  '(auto-complete idomenu ido-vertical-mode rubocop
-    exec-path-from-shell rspec-mode direnv
+  '(auto-complete idomenu ido-vertical-mode ido-completing-read+
+    smex rubocop exec-path-from-shell rspec-mode direnv
     rbenv yasnippet dumb-jump dired-subtree
     slim-mode string-inflection
     coffee-mode wgrep dashboard paradox
@@ -142,7 +142,6 @@
 (add-hook 'after-init-hook 'inf-ruby-switch-setup)
 ;; @see https://github.com/pezra/rspec-mode#auto-scrolling
 (setq compilation-scroll-output t)
-
 
 (yas-global-mode 1)
 (setq yas-prompt-functions '(yas-ido-prompt))
@@ -262,6 +261,18 @@
  :ensure t
  :custom
  (paradox-github-token t))
+
+(use-package ido-completing-read+
+  :config
+  (ido-ubiquitous-mode 1)
+  )
+
+(use-package smex
+  :config
+  (global-set-key (kbd "M-x") 'smex)
+  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;old M-x
+  )
 
 ; https://github.com/purcell/exec-path-from-shell
 (when (memq window-system '(mac ns x))

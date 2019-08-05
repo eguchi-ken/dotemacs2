@@ -203,6 +203,11 @@
   (projectile-mode +1)
 )
 
+(use-package projectile-rails
+  :config
+  (projectile-rails-global-mode)
+  )
+
 (use-package dashboard
   :config
   (setq dashboard-items '((recents  . 10) (projects . 10) (bookmarks . 5)))

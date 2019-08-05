@@ -186,11 +186,8 @@
 (use-package rbenv
   :config
   (setq rbenv-show-active-ruby-in-modeline nil)
+  (global-rbenv-mode)
 )
-
-
-
-(global-rbenv-mode)
 
 (use-package wdired)         ; Dired バッファの上でファイル名をリネームできるようにする
 

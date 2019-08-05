@@ -82,6 +82,12 @@
 (set-fontset-font t 'japanese-jisx0208 (font-spec :family "Ricty")) ; これがないと一部の漢字のフォントがおかしくなる
 (fset 'yes-or-no-p 'y-or-n-p) ; yes or no の質問を y, n で答えられるようにする
 
+(add-hook 'occur-mode-hook (lambda ()
+  (next-error-follow-minor-mode)
+  (local-set-key (kbd "n") 'next-line)
+  (local-set-key (kbd "p") 'previous-line)
+ ))
+
 (package-initialize)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)

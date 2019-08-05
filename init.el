@@ -1,4 +1,5 @@
 (setenv "SPEC_OPTS" "--format documentation")
+(setenv "RSPEC_RETRY_RETRY_COUNT" "1")
 
 (ido-mode t)
 (setq ido-enable-flex-matching t)

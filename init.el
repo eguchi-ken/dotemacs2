@@ -252,6 +252,8 @@
 (use-package spaceline-config
   :config
   (spaceline-emacs-theme)
+  (spaceline-toggle-minor-modes-off)
+  (spaceline-toggle-version-control-off)
 )
 
 (use-package paradox

@@ -60,6 +60,7 @@
 (add-hook 'org-mode-hook (lambda ()
   (setq org-hide-leading-stars t)
   (setq org-indent-indentation-per-level 8)
+  (setq org-todo-keywords '((sequence "TODO" "DOING" "|" "DONE")))
   (local-unset-key (kbd "M-h"))    ; org-mode の M-h を利用しない。
   (org-indent-mode t)              ; インデントをヘッダに合わせる。
   ))

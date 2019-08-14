@@ -144,6 +144,11 @@
 ;; @see https://github.com/pezra/rspec-mode#auto-scrolling
 (setq compilation-scroll-output t)
 
+(add-to-list 'auto-mode-alist '("\\.js$" . js-jsx-mode))
+(add-hook 'js-jsx-mode-hook (lambda()
+   (setq-local sgml-basic-offset 2)
+   (setq-local js-indent-level 2)))
+
 (yas-global-mode 1)
 (setq yas-prompt-functions '(yas-ido-prompt))
 

@@ -99,6 +99,7 @@
     rbenv yasnippet dumb-jump dired-subtree
     slim-mode string-inflection
     coffee-mode wgrep dashboard paradox
+    rjsx-mode
     projectile projectile-rails spaceline
     use-package magit key-chord rebecca-theme wdired))
 (dolist (package my/favorite-packages)
@@ -143,12 +144,6 @@
 (add-hook 'after-init-hook 'inf-ruby-switch-setup)
 ;; @see https://github.com/pezra/rspec-mode#auto-scrolling
 (setq compilation-scroll-output t)
-
-(add-to-list 'auto-mode-alist '("\\.js$" . js-jsx-mode))
-(add-hook 'js-jsx-mode-hook (lambda()
-   (auto-complete-mode)
-   (setq-local sgml-basic-offset 2)
-   (setq-local js-indent-level 2)))
 
 (yas-global-mode 1)
 (setq yas-prompt-functions '(yas-ido-prompt))
@@ -279,6 +274,17 @@
   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
   (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;old M-x
   )
+
+(use-package rjsx-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.js$" . rjsx-mode))
+  (add-hook 'rjsx-mode-hook (lambda()
+    (auto-complete-mode)
+    (setq-local sgml-basic-offset 2)
+    (setq-local js-indent-level 2)
+    (setq js2-strict-missing-semi-warning nil)))
+)
+
 
 ; https://github.com/purcell/exec-path-from-shell
 (when (memq window-system '(mac ns x))

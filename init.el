@@ -183,6 +183,7 @@
 (global-set-key (kbd "s-t") 'make-frame-command)           ; C-x 5 2
 (global-set-key (kbd "s-D") 'split-window-vertically)      ; iterm と同じ
 (global-set-key (kbd "s-d") 'split-window-horizontally)    ; iterm と同じ
+(global-set-key (kbd "s-q") 'version)                      ; 誤操作防止用
 
 ; https://github.com/senny/rbenv.el
 (use-package rbenv

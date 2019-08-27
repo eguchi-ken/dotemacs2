@@ -198,6 +198,8 @@
   :config
   (setf wgrep-enable-key "r")
   (setq wgrep-auto-save-buffer t)
+  (setq grep-find-ignored-directories (append grep-find-ignored-directories '("node_modules" ".bundle" "yardoc" "coverage" "log" "tmp")))
+  (setq grep-find-ignored-files (append grep-find-ignored-files '("*.min.js" "*.log")))
 )
 
 (use-package projectile

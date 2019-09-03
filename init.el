@@ -124,12 +124,6 @@
 (ido-vertical-mode 1)
 (global-set-key (kbd "M-i") 'idomenu)
 
-(defun coffee-custom ()
-    "coffee-mode-hook"
-    (set (make-local-variable 'tab-width) 2)
-    (setq coffee-tab-width 2))
-(add-hook 'coffee-mode-hook '(lambda() (coffee-custom)))
-
 (setq ruby-insert-encoding-magic-comment nil)
 (setq ruby-deep-indent-paren-style nil)
 (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
@@ -184,6 +178,13 @@
 (global-set-key (kbd "s-D") 'split-window-vertically)      ; iterm と同じ
 (global-set-key (kbd "s-d") 'split-window-horizontally)    ; iterm と同じ
 (global-set-key (kbd "s-q") 'version)                      ; 誤操作防止用
+
+(use-package coffee-mode
+  :config
+  (add-hook 'coffee-mode-hook (lambda()
+    (auto-complete-mode)
+    (setq coffee-tab-width 2))
+))
 
 ; https://github.com/senny/rbenv.el
 (use-package rbenv

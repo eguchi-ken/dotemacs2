@@ -99,8 +99,7 @@
     smex rubocop exec-path-from-shell rspec-mode direnv
     rbenv yasnippet dumb-jump dired-subtree
     slim-mode string-inflection
-    coffee-mode wgrep dashboard paradox
-    rjsx-mode
+    coffee-mode wgrep dashboard paradox web-mode
     projectile projectile-rails spaceline
     use-package magit key-chord rebecca-theme wdired))
 (dolist (package my/favorite-packages)
@@ -282,16 +281,14 @@
   (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;old M-x
   )
 
-(use-package rjsx-mode
+(use-package web-mode
   :config
-  (add-to-list 'auto-mode-alist '("\\.js$" . rjsx-mode))
-  (add-hook 'rjsx-mode-hook (lambda()
+  (add-to-list 'auto-mode-alist '("\\.js[x]?$" . web-mode))
+  (setq web-mode-content-types-alist '(("jsx"  . ".js[x]?\\'")))
+  (add-hook 'web-mode-hook (lambda()
     (auto-complete-mode)
-    (setq-local sgml-basic-offset 2)
-    (setq-local js-indent-level 2)
-    (setq js2-strict-missing-semi-warning nil)))
-)
-
+    (setq web-mode-code-indent-offset 2)
+    (setq web-mode-markup-indent-offset 2))))
 
 ; https://github.com/purcell/exec-path-from-shell
 (when (memq window-system '(mac ns x))

@@ -12,6 +12,7 @@
 (column-number-mode t)
 (global-hl-line-mode)
 (global-auto-revert-mode 1)
+(electric-pair-mode 1)
 (setq show-paren-delay 0)
 (setq show-paren-style 'expression)
 (setq-default indent-tabs-mode nil)

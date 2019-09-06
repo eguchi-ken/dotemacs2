@@ -108,16 +108,6 @@
 
 (load-theme 'rebecca t)
 
-(setq dired-dwim-target t) ; 2個のdiredバッファがある時、コピー/移動先のパスを他方のバッファにする
-
-(add-hook 'dired-mode-hook (lambda ()
-  (local-unset-key (kbd "C-t"))                         ; 普段の C-t をそのまま
-  (local-set-key (kbd "j")     'dired-next-line)        ; vim のような上下移動
-  (local-set-key (kbd "k")     'dired-previous-line)    ; vim のような上下移動
-  (local-set-key (kbd "<tab>") 'dired-subtree-insert)   ; サブツリーを見やすく開く(org-modeと揃える)
-  (local-set-key (kbd "h")     'dired-subtree-remove)   ; サブツリーを隠す
-  (local-set-key (kbd "r")     'wdired-change-to-wdired-mode) ; ファイル名編集
-))
 
 (setq ido-max-window-height 0.75)
 (setq ido-vertical-define-keys 'C-n-C-p-up-and-down)
@@ -182,7 +172,15 @@
 (use-package dired
   :config
   (setq dired-use-ls-dired nil)
-  )
+  (setq dired-dwim-target t) ; 2個のdiredバッファがある時、コピー/移動先のパスを他方のバッファにする
+  (add-hook 'dired-mode-hook (lambda ()
+    (local-unset-key (kbd "C-t"))                         ; 普段の C-t をそのまま
+    (local-set-key (kbd "j")     'dired-next-line)        ; vim のような上下移動
+    (local-set-key (kbd "k")     'dired-previous-line)    ; vim のような上下移動
+    (local-set-key (kbd "<tab>") 'dired-subtree-insert)   ; サブツリーを見やすく開く(org-modeと揃える)
+    (local-set-key (kbd "h")     'dired-subtree-remove)   ; サブツリーを隠す
+    (local-set-key (kbd "r")     'wdired-change-to-wdired-mode) ; ファイル名編集
+    )))
 
 (use-package coffee-mode
   :config

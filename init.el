@@ -236,10 +236,11 @@
 
 (use-package forge
   :after magit)
+
 (use-package direnv
  :config
  (setq direnv-always-show-summary nil)
- (direnv-mode))
+ (if (direnv--detect) (direnv-mode)))
 
 (use-package key-chord
   :config

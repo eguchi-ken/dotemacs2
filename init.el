@@ -179,6 +179,11 @@
 (global-set-key (kbd "s-d") 'split-window-horizontally)    ; iterm と同じ
 (global-set-key (kbd "s-q") 'version)                      ; 誤操作防止用
 
+(use-package dired
+  :config
+  (setq dired-use-ls-dired nil)
+  )
+
 (use-package coffee-mode
   :config
   (add-hook 'coffee-mode-hook (lambda()

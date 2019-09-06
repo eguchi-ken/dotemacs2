@@ -173,14 +173,16 @@
   :config
   (setq dired-use-ls-dired nil)
   (setq dired-dwim-target t) ; 2個のdiredバッファがある時、コピー/移動先のパスを他方のバッファにする
-  (add-hook 'dired-mode-hook (lambda ()
-    (local-unset-key (kbd "C-t"))                         ; 普段の C-t をそのまま
-    (local-set-key (kbd "j")     'dired-next-line)        ; vim のような上下移動
-    (local-set-key (kbd "k")     'dired-previous-line)    ; vim のような上下移動
-    (local-set-key (kbd "<tab>") 'dired-subtree-insert)   ; サブツリーを見やすく開く(org-modeと揃える)
-    (local-set-key (kbd "h")     'dired-subtree-remove)   ; サブツリーを隠す
-    (local-set-key (kbd "r")     'wdired-change-to-wdired-mode) ; ファイル名編集
-    )))
+  (unbind-key "C-t" dired-mode-map)
+  :bind (:map dired-mode-map
+              ("j" . 'dired-next-line)
+              ("k" . 'dired-previous-line)
+              ("<tab>" . 'dired-subtree-insert)
+              ("<backtab>" . 'dired-subtree-remove)
+              ("h" . 'dired-subtree-remove)
+              ("r" . 'wdired-change-to-wdired-mode)))
+(use-package dired-subtree)
+(use-package wdired)
 
 (use-package coffee-mode
   :config
@@ -195,8 +197,6 @@
   (setq rbenv-show-active-ruby-in-modeline nil)
   (global-rbenv-mode)
 )
-
-(use-package wdired)         ; Dired バッファの上でファイル名をリネームできるようにする
 
 (use-package wgrep
   :config
@@ -279,11 +279,9 @@
   )
 
 (use-package smex
-  :config
-  (global-set-key (kbd "M-x") 'smex)
-  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;old M-x
-  )
+  :bind
+  ("M-x" . 'smex)
+  ("M-X" . 'smex-major-mode-commands))
 
 (use-package web-mode
   :config

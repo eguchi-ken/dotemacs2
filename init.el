@@ -1,12 +1,6 @@
 (setenv "SPEC_OPTS" "--format documentation --fail-fast")
 (setenv "RSPEC_RETRY_RETRY_COUNT" "1")
 
-(ido-mode t)
-(setq ido-enable-flex-matching t)
-(setq ido-use-filename-at-point 'guess) ; find-file の時 path にカーソルが当たってたらそれを開く
-(setq ido-use-url-at-point t)  ; find-file の時 url にカーソルが当たってたらそれを開く
-(setq ido-auto-merge-work-directories-length -1) ; マッチするものがない時に、自動で recentf を検索しない
-(ido-everywhere t)
 (menu-bar-mode -1)
 (show-paren-mode 1)
 (column-number-mode t)
@@ -109,10 +103,6 @@
 (load-theme 'rebecca t)
 
 
-(setq ido-max-window-height 0.75)
-(setq ido-vertical-define-keys 'C-n-C-p-up-and-down)
-(ido-vertical-mode 1)
-(global-set-key (kbd "M-i") 'idomenu)
 
 (setq ruby-insert-encoding-magic-comment nil)
 (setq ruby-deep-indent-paren-style nil)
@@ -168,6 +158,26 @@
 (global-set-key (kbd "s-D") 'split-window-vertically)      ; iterm と同じ
 (global-set-key (kbd "s-d") 'split-window-horizontally)    ; iterm と同じ
 (global-set-key (kbd "s-q") 'version)                      ; 誤操作防止用
+
+(use-package ido
+  :config
+  (setq ido-enable-flex-matching t)
+  (setq ido-use-filename-at-point 'guess) ; find-file の時 path にカーソルが当たってたらそれを開く
+  (setq ido-use-url-at-point t)  ; find-file の時 url にカーソルが当たってたらそれを開く
+  (setq ido-auto-merge-work-directories-length -1) ; マッチするものがない時に、自動で recentf を検索しない
+  (setq ido-max-window-height 0.75)
+  (setq ido-vertical-define-keys 'C-n-C-p-up-and-down)
+  (ido-mode t)
+  (ido-everywhere t)
+  (ido-vertical-mode 1)
+  (global-set-key (kbd "M-i") 'idomenu))
+(use-package ido-completing-read+
+  :config
+  (ido-ubiquitous-mode 1))
+(use-package smex
+  :bind
+  ("M-x" . 'smex)
+  ("M-X" . 'smex-major-mode-commands))
 
 (use-package dired
   :config
@@ -272,16 +282,6 @@
  :ensure t
  :custom
  (paradox-github-token t))
-
-(use-package ido-completing-read+
-  :config
-  (ido-ubiquitous-mode 1)
-  )
-
-(use-package smex
-  :bind
-  ("M-x" . 'smex)
-  ("M-X" . 'smex-major-mode-commands))
 
 (use-package web-mode
   :config

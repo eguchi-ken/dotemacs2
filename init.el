@@ -26,24 +26,6 @@
 ;; http://hylom.net/emacs-25.1-ime-flicker-problem
 (setq redisplay-dont-pause nil)
 
-; https://qiita.com/tadsan/items/68b53c2b0e8bb87a78d7
-(setq recentf-max-saved-items 2000) ;; 2000ファイルまで履歴保存する
-(setq recentf-auto-cleanup 'never)  ;; 存在しないファイルは消さない
-(setq recentf-exclude '("/recentf" "COMMIT_EDITMSG" "/.?TAGS" "^/sudo:" "/\\.emacs\\.d/games/*-scores" "/\\.emacs\\.d/\\.cask/"))
-(setq recentf-auto-save-timer (run-with-idle-timer 30 t 'recentf-save-list))
-
-;; http://garin.jp/2017/09/09/2017-09-09-143435.html
-;; recentf の メッセージをエコーエリア(ミニバッファ)に表示しない
-;; (*Messages* バッファには出力される)
-(defun recentf-save-list-inhibit-message:around (orig-func &rest args)
-  (setq inhibit-message t)
-  (apply orig-func args)
-  (setq inhibit-message nil)
-  'around)
-(advice-add 'recentf-cleanup   :around 'recentf-save-list-inhibit-message:around)
-(advice-add 'recentf-save-list :around 'recentf-save-list-inhibit-message:around)
-(recentf-mode 1)
-
 (add-hook 'org-mode-hook (lambda ()
   (setq org-hide-leading-stars t)
   (setq org-indent-indentation-per-level 8)
@@ -148,7 +130,11 @@
 (global-set-key (kbd "s-q") 'version)                      ; 誤操作防止用
 (global-set-key (kbd "M-i") 'imenu)
 
-
+(use-package recentf
+  :config
+  (setq recentf-max-saved-items 2000)
+  (setq recentf-auto-cleanup 'never)
+  (recentf-mode 1))
 
 (use-package ivy
   :config

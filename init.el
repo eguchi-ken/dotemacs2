@@ -31,7 +31,6 @@
 (setq recentf-auto-cleanup 'never)  ;; 存在しないファイルは消さない
 (setq recentf-exclude '("/recentf" "COMMIT_EDITMSG" "/.?TAGS" "^/sudo:" "/\\.emacs\\.d/games/*-scores" "/\\.emacs\\.d/\\.cask/"))
 (setq recentf-auto-save-timer (run-with-idle-timer 30 t 'recentf-save-list))
-(recentf-mode 1)
 
 ;; http://garin.jp/2017/09/09/2017-09-09-143435.html
 ;; recentf の メッセージをエコーエリア(ミニバッファ)に表示しない
@@ -44,13 +43,6 @@
 (advice-add 'recentf-cleanup   :around 'recentf-save-list-inhibit-message:around)
 (advice-add 'recentf-save-list :around 'recentf-save-list-inhibit-message:around)
 (recentf-mode 1)
-; https://www.emacswiki.org/emacs/RecentFiles#toc8
-(defun recentf-ido-find-file ()
-  "Find a recent file using Ido."
-  (interactive)
-  (let ((file (ido-completing-read "Choose recent file: " recentf-list nil t)))
-    (when file
-      (find-file file))))
 
 (add-hook 'org-mode-hook (lambda ()
   (setq org-hide-leading-stars t)
@@ -71,7 +63,6 @@
 (global-set-key (kbd "M-t") 'other-window-back)
 (global-set-key (kbd "C-x SPC") 'cua-rectangle-mark-mode)  ; 矩形選択/入力
 (global-set-key (kbd "C-c l") 'toggle-truncate-lines)      ; 行末で折り返す <-> 折り返さない
-(global-set-key (kbd "C-c t") 'recentf-ido-find-file)
 
 ; (font-family-list) でフォント一覧を見れるのでそこから選ぶ
 (set-face-attribute 'default nil :family "Ricty" :height 170)
@@ -89,9 +80,8 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-refresh-contents)
 (defvar my/favorite-packages
-  '(auto-complete idomenu ido-vertical-mode ido-completing-read+
-    smex rubocop exec-path-from-shell rspec-mode direnv
-    rbenv yasnippet dumb-jump dired-subtree
+  '(auto-complete rubocop exec-path-from-shell rspec-mode direnv
+    rbenv yasnippet dumb-jump dired-subtree ivy
     slim-mode string-inflection
     coffee-mode wgrep dashboard paradox web-mode
     projectile projectile-rails spaceline
@@ -101,8 +91,6 @@
     (package-install package)))
 
 (load-theme 'rebecca t)
-
-
 
 (setq ruby-insert-encoding-magic-comment nil)
 (setq ruby-deep-indent-paren-style nil)
@@ -158,26 +146,16 @@
 (global-set-key (kbd "s-D") 'split-window-vertically)      ; iterm と同じ
 (global-set-key (kbd "s-d") 'split-window-horizontally)    ; iterm と同じ
 (global-set-key (kbd "s-q") 'version)                      ; 誤操作防止用
+(global-set-key (kbd "M-i") 'imenu)
 
-(use-package ido
+
+
+(use-package ivy
   :config
-  (setq ido-enable-flex-matching t)
-  (setq ido-use-filename-at-point 'guess) ; find-file の時 path にカーソルが当たってたらそれを開く
-  (setq ido-use-url-at-point t)  ; find-file の時 url にカーソルが当たってたらそれを開く
-  (setq ido-auto-merge-work-directories-length -1) ; マッチするものがない時に、自動で recentf を検索しない
-  (setq ido-max-window-height 0.75)
-  (setq ido-vertical-define-keys 'C-n-C-p-up-and-down)
-  (ido-mode t)
-  (ido-everywhere t)
-  (ido-vertical-mode 1)
-  (global-set-key (kbd "M-i") 'idomenu))
-(use-package ido-completing-read+
-  :config
-  (ido-ubiquitous-mode 1))
-(use-package smex
-  :bind
-  ("M-x" . 'smex)
-  ("M-X" . 'smex-major-mode-commands))
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-height 20)
+  (ivy-mode)
+  (counsel-mode))
 
 (use-package dired
   :config
@@ -262,7 +240,6 @@
   (key-chord-define-global "fd" 'find-file)
   (key-chord-define-global "gh" 'magit-status)
   (key-chord-define-global "sd" 'save-buffer)
-  (key-chord-define-global "rt" 'recentf-ido-find-file)
   (key-chord-define-global "bm" 'bookmark-jump)
   (key-chord-define-global "dj" 'dumb-jump-go)
   (key-chord-define-global "y7" 'yas-insert-snippet)

@@ -197,9 +197,8 @@
 
 (use-package dashboard
   :config
-  (setq dashboard-items '((recents  . 10) (projects . 10) (bookmarks . 5)))
-  (dashboard-setup-startup-hook)
-)
+  (setq dashboard-set-init-info t)
+  (dashboard-setup-startup-hook))
 
 (use-package auto-complete)
 (use-package auto-complete-config

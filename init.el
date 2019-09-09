@@ -63,7 +63,7 @@
 (package-refresh-contents)
 (defvar my/favorite-packages
   '(auto-complete rubocop exec-path-from-shell rspec-mode direnv
-    rbenv yasnippet dumb-jump rg dired-subtree ivy
+    rbenv yasnippet dumb-jump rg dired-subtree ivy counsel
     slim-mode string-inflection
     coffee-mode wgrep dashboard paradox web-mode
     projectile projectile-rails spaceline

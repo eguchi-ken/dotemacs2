@@ -211,6 +211,10 @@
   (setq ac-auto-start 4)
 )
 
+(use-package magit
+  :config
+  (setq magit-completing-read-function 'ivy-completing-read))
+
 (use-package forge
   :after magit)
 

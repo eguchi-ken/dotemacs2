@@ -63,7 +63,7 @@
 (package-refresh-contents)
 (defvar my/favorite-packages
   '(auto-complete rubocop exec-path-from-shell rspec-mode direnv
-    rbenv yasnippet dumb-jump dired-subtree ivy
+    rbenv yasnippet dumb-jump rg dired-subtree ivy
     slim-mode string-inflection
     coffee-mode wgrep dashboard paradox web-mode
     projectile projectile-rails spaceline
@@ -227,10 +227,17 @@
   (key-chord-define-global "sd" 'save-buffer)
   (key-chord-define-global "bm" 'bookmark-jump)
   (key-chord-define-global "dj" 'dumb-jump-go)
+  (key-chord-define-global "p@" 'dumb-jump-go-prompt)
   (key-chord-define-global "y7" 'yas-insert-snippet)
   (key-chord-define-global "id" 'insert-current-date)
   (key-chord-define-global "fp" 'file-full-path)
   (key-chord-define-global "cy" 'string-inflection-ruby-style-cycle)
+)
+
+(use-package rg)
+(use-package dumb-jump
+  :config
+  (setq dumb-jump-force-searcher 'rg)
 )
 
 (use-package spaceline-config

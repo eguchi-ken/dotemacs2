@@ -243,6 +243,7 @@
 (use-package dumb-jump
   :config
   (setq dumb-jump-force-searcher 'rg)
+  (setq dumb-jump-selector 'ivy)
 )
 
 (use-package spaceline-config

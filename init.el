@@ -185,6 +185,7 @@
 (use-package projectile
   :config
   (setq projectile-project-search-path '("~/"))
+  (setq projectile-completion-system 'ivy)
   (projectile-mode +1)
   :bind-keymap
   ("C-c p" . projectile-command-map)

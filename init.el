@@ -158,6 +158,11 @@
 (use-package dired-subtree)
 (use-package wdired)
 
+(use-package exec-path-from-shell
+  :if (memq window-system '(mac ns x))
+  :config
+  (exec-path-from-shell-initialize))
+
 (use-package coffee-mode
   :config
   (add-hook 'coffee-mode-hook (lambda()
@@ -269,9 +274,6 @@
     (setq web-mode-code-indent-offset 2)
     (setq web-mode-markup-indent-offset 2))))
 
-; https://github.com/purcell/exec-path-from-shell
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -240,7 +240,8 @@
   (key-chord-define-global "cy" 'string-inflection-ruby-style-cycle)
 )
 
-(use-package rg)
+(use-package rg
+  :if (file-exists-p "/usr/local/bin/rg"))
 (use-package dumb-jump
   :config
   (setq dumb-jump-force-searcher 'rg)

@@ -219,9 +219,10 @@
   :after magit)
 
 (use-package direnv
- :config
- (setq direnv-always-show-summary nil)
- (if (direnv--detect) (direnv-mode)))
+  :if (file-exists-p "/usr/local/bin/direnv")
+  :config
+  (setq direnv-always-show-summary nil)
+  (direnv-mode))
 
 (use-package key-chord
   :config

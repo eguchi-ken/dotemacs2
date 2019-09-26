@@ -67,7 +67,7 @@
     slim-mode string-inflection
     coffee-mode wgrep dashboard paradox web-mode
     projectile projectile-rails spaceline
-    use-package magit key-chord rebecca-theme wdired))
+    use-package magit forge key-chord rebecca-theme wdired))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
     (package-install package)))

@@ -22,9 +22,9 @@
 ; https://emacs.stackexchange.com/questions/598/how-do-i-prevent-extremely-long-lines-making-emacs-slow/601
 (setq-default bidi-display-reordering nil)
 
-; 日本語入力時のちらつきを防止する
+; 日本語入力時のちらつきを防止する 26.3 では画面が崩れ表示できなくなるので現状 NG (我慢するしかない)
 ;; http://hylom.net/emacs-25.1-ime-flicker-problem
-(setq redisplay-dont-pause nil)
+(if (version<= emacs-version "26.1") (setq redisplay-dont-pause nil))
 
 (add-hook 'org-mode-hook (lambda ()
   (setq org-hide-leading-stars t)

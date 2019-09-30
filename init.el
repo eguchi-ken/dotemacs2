@@ -240,7 +240,7 @@
   (key-chord-define-global "dj" 'dumb-jump-go)
   (key-chord-define-global "p@" 'dumb-jump-go-prompt)
   (key-chord-define-global "y7" 'yas-insert-snippet)
-  (key-chord-define-global "id" 'insert-current-date)
+  (key-chord-define-global "i9" 'insert-current-date)
   (key-chord-define-global "fp" 'file-full-path)
   (key-chord-define-global "cy" 'string-inflection-ruby-style-cycle)
 )

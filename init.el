@@ -84,6 +84,17 @@
   (local-set-key (kbd "C-c , R") 'rubocop-autocorrect-current-file)
 ))
 
+;; https://qiita.com/eggc/items/718dd41fa778b91f302e
+(defalias '~ruby-syntax-propertize-function
+  (syntax-propertize-rules
+   ;; 文字列2重展開があるとシンタックスハイライトがおかしくなるので、 ruby-expression-expansion-re を修正したやつを追加
+   ("\\(?:[^\\]\\|\\=\\)\\(\\\\\\\\\\)*\\(#{[^{^}]*#{[^}]*}[^}]*}\\)\\|\\(#\\({[^}\n\\\\]*\\(\\\\.[^}\n\\\\]*\\)*}\\|\\(\\$\\|@\\|@@\\)\\(\\w\\|_\\)+\\|\\$[^a-zA-Z \n]\\)\\)"
+    (0 (ignore (ruby-syntax-propertize-expansion))))))
+(defun ~ruby-fix-syntax-propertize ()
+  (add-function :before (local 'syntax-propertize-function) '~ruby-syntax-propertize-function))
+(add-hook 'ruby-mode-hook '~ruby-fix-syntax-propertize t)
+
+
 ;; @see https://github.com/pezra/rspec-mode#debugging
 (add-hook 'after-init-hook 'inf-ruby-switch-setup)
 ;; @see https://github.com/pezra/rspec-mode#auto-scrolling

@@ -27,6 +27,7 @@
 (if (version<= emacs-version "26.1") (setq redisplay-dont-pause nil))
 
 (add-hook 'org-mode-hook (lambda ()
+  (setq org-agenda-files '("~/work/text/report.org"))
   (setq org-hide-leading-stars t)
   (setq org-indent-indentation-per-level 8)
   (setq org-todo-keywords '((sequence "TODO" "DOING" "|" "DONE")))

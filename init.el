@@ -286,6 +286,10 @@
     (setq web-mode-code-indent-offset 2)
     (setq web-mode-markup-indent-offset 2))))
 
+(use-package eww
+  :config
+  (setq eww-search-prefix "http://www.google.co.jp/search?q="))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

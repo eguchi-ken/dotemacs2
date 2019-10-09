@@ -1,3 +1,4 @@
+;test
 (setenv "SPEC_OPTS" "--format documentation --fail-fast")
 (setenv "RSPEC_RETRY_RETRY_COUNT" "1")
 

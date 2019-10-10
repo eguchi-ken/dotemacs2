@@ -37,8 +37,7 @@
 
 (defun other-window-back ()
   (interactive)
-  (other-window -1)
-  )
+  (other-window -1))
 
 (keyboard-translate ?\C-h ?\C-?)                           ; C-h で delete を発行
 (global-set-key (kbd "M-h") 'backward-kill-word)
@@ -47,9 +46,10 @@
 (global-set-key (kbd "C-x SPC") 'cua-rectangle-mark-mode)  ; 矩形選択/入力
 (global-set-key (kbd "C-c l") 'toggle-truncate-lines)      ; 行末で折り返す <-> 折り返さない
 
-; (font-family-list) でフォント一覧を見れるのでそこから選ぶ
-(set-face-attribute 'default nil :family "Ricty" :height 170)
-(set-fontset-font t 'japanese-jisx0208 (font-spec :family "Ricty")) ; これがないと一部の漢字のフォントがおかしくなる
+(setq my-font (if (member "Ricty" (font-family-list)) "Ricty" "Monaco"))
+(set-face-attribute 'default nil :family my-font :height 150)
+(set-fontset-font t 'japanese-jisx0208 (font-spec :family my-font)) ; これがないと一部の漢字のフォントがおかしくなる
+
 (fset 'yes-or-no-p 'y-or-n-p) ; yes or no の質問を y, n で答えられるようにする
 
 (add-hook 'occur-mode-hook (lambda ()

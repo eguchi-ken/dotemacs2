@@ -141,6 +141,7 @@
 (global-set-key (kbd "s-d") 'split-window-horizontally)    ; iterm と同じ
 (global-set-key (kbd "s-q") 'version)                      ; 誤操作防止用
 (global-set-key (kbd "M-i") 'imenu)
+(global-set-key (kbd "C-s-f") 'toggle-frame-fullscreen)
 
 (use-package recentf
   :config

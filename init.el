@@ -255,10 +255,18 @@
   (key-chord-define-global "i9" 'insert-current-date)
   (key-chord-define-global "fp" 'file-full-path)
   (key-chord-define-global "cy" 'string-inflection-ruby-style-cycle)
+  (key-chord-define-global "rg" 'rg2)
 )
 
 (use-package rg
-  :if (file-exists-p "/usr/local/bin/rg"))
+  :if (file-exists-p "/usr/local/bin/rg")
+  :config
+  (rg-define-search rg2 "Search files in current directory"
+    :query ask
+    :format regexp
+    :files "everything"
+    :dir current))
+
 (use-package dumb-jump
   :config
   (setq dumb-jump-force-searcher 'rg)

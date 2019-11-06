@@ -231,7 +231,8 @@
 
 (use-package magit
   :config
-  (setq magit-completing-read-function 'ivy-completing-read))
+  (setq magit-completing-read-function 'ivy-completing-read)
+  (remove-hook 'magit-refs-sections-hook 'magit-insert-tags))
 
 (use-package forge
   :after magit

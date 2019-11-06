@@ -234,7 +234,12 @@
   (setq magit-completing-read-function 'ivy-completing-read))
 
 (use-package forge
-  :after magit)
+  :after magit
+  :config
+  ; 重いので issue や pull-req は表示しない
+  (remove-hook 'magit-status-sections-hook 'forge-insert-pullreqs)
+  (remove-hook 'magit-status-sections-hook 'forge-insert-issues)
+)
 
 (use-package direnv
   :if (file-exists-p "/usr/local/bin/direnv")

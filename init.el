@@ -113,9 +113,8 @@
        "echo -n $(LANG=ja_JP date -v-%dd +'%%Y/%%m/%%d (%%a)')"
        (or diff 0)))))
 
-;; 今開いているファイルのフルパスを得る。dired バッファは NG
 (defun file-full-path ()
-  "Put the current file name on the clipboard"
+  "今開いているファイルの絶対パスをクリップボードにコピーします"
   (interactive)
   (let ((filename (if (equal major-mode 'dired-mode)
                       default-directory
@@ -125,6 +124,11 @@
         (insert filename)
         (clipboard-kill-region (point-min) (point-max)))
       (message filename))))
+
+(defun open-current-buffer-file ()
+  "今開いているファイルを open します"
+  (interactive)
+  (shell-command (concat "open " (buffer-file-name))))
 
 ; for emacs cocoa
 (menu-bar-mode t)
@@ -263,6 +267,7 @@
   (key-chord-define-global "fp" 'file-full-path)
   (key-chord-define-global "cy" 'string-inflection-ruby-style-cycle)
   (key-chord-define-global "rg" 'rg2)
+  (key-chord-define-global "o0" 'open-current-buffer-file)
 )
 
 (use-package rg

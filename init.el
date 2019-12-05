@@ -241,9 +241,8 @@
 (use-package forge
   :after magit
   :config
-  ; 重いので issue や pull-req は表示しない
-  (remove-hook 'magit-status-sections-hook 'forge-insert-pullreqs)
-  (remove-hook 'magit-status-sections-hook 'forge-insert-issues)
+  ;; (remove-hook 'magit-status-sections-hook 'forge-insert-pullreqs)
+  ;; (remove-hook 'magit-status-sections-hook 'forge-insert-issues)
 )
 
 (use-package direnv

@@ -243,7 +243,10 @@
   :config
   ;; (remove-hook 'magit-status-sections-hook 'forge-insert-pullreqs)
   ;; (remove-hook 'magit-status-sections-hook 'forge-insert-issues)
-)
+  (setq forge-topic-list-columns
+        '(("#" 5 forge-topic-list-sort-by-number (:right-align t) number nil)
+          ("Assignees" 15 t nil assignees nil)
+          ("Title" 35 t nil title  nil))))
 
 (use-package direnv
   :if (file-exists-p "/usr/local/bin/direnv")

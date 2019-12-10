@@ -114,11 +114,11 @@
        (or diff 0)))))
 
 (defun file-full-path ()
-  "今開いているファイルの絶対パスをクリップボードにコピーします"
+  "今開いているファイルの絶対パス::行数をクリップボードにコピーします"
   (interactive)
   (let ((filename (if (equal major-mode 'dired-mode)
                       default-directory
-                    (buffer-file-name))))
+                    (concat (buffer-file-name) "::" (number-to-string (line-number-at-pos))))))
     (when filename
       (with-temp-buffer
         (insert filename)

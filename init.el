@@ -67,7 +67,7 @@
     rbenv yasnippet dumb-jump rg dired-subtree ivy counsel
     slim-mode string-inflection
     coffee-mode wgrep dashboard paradox web-mode
-    projectile projectile-rails spaceline
+    projectile projectile-rails spaceline tide
     use-package magit forge key-chord rebecca-theme wdired))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
@@ -302,6 +302,7 @@
 (use-package web-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.js[x]?$" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.ts[x]?$" . web-mode))
   (setq web-mode-content-types-alist '(("jsx"  . ".js[x]?\\'")))
   (add-hook 'web-mode-hook (lambda()
     (auto-complete-mode)
@@ -311,6 +312,13 @@
 (use-package eww
   :config
   (setq eww-search-prefix "http://www.google.co.jp/search?q="))
+
+(use-package tide
+  :ensure t
+  :after (typescript-mode company flycheck)
+  :hook ((typescript-mode . tide-setup)
+         (typescript-mode . tide-hl-identifier-mode)
+         (before-save . tide-format-before-save)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

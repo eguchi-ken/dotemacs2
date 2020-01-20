@@ -313,6 +313,10 @@
   :config
   (setq eww-search-prefix "http://www.google.co.jp/search?q="))
 
+(use-package js
+  :config
+  (setq js-indent-level 2))
+
 (use-package tide
   :ensure t
   :after (typescript-mode company flycheck)

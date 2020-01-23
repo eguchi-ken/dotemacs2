@@ -63,7 +63,7 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-refresh-contents)
 (defvar my/favorite-packages
-  '(auto-complete rubocop exec-path-from-shell rspec-mode direnv
+  '(auto-complete rubocop exec-path-from-shell direnv
     rbenv yasnippet dumb-jump rg dired-subtree ivy counsel
     slim-mode string-inflection
     coffee-mode wgrep dashboard paradox web-mode
@@ -96,10 +96,6 @@
 (add-hook 'ruby-mode-hook '~ruby-fix-syntax-propertize t)
 
 
-;; @see https://github.com/pezra/rspec-mode#debugging
-(add-hook 'after-init-hook 'inf-ruby-switch-setup)
-;; @see https://github.com/pezra/rspec-mode#auto-scrolling
-;; (setq compilation-scroll-output nil)
 
 (yas-global-mode 1)
 (setq yas-prompt-functions '(yas-ido-prompt))
@@ -323,6 +319,13 @@
   :hook ((typescript-mode . tide-setup)
          (typescript-mode . tide-hl-identifier-mode)
          (before-save . tide-format-before-save)))
+
+(use-package rspec-mode
+  :config
+  ;; @see https://github.com/pezra/rspec-mode#debugging
+  (add-hook 'after-init-hook 'inf-ruby-switch-setup)
+  (setq rspec-use-spring-when-possible nil))
+
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

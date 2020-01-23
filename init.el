@@ -326,6 +326,8 @@
   (add-hook 'after-init-hook 'inf-ruby-switch-setup)
   (setq rspec-use-spring-when-possible nil))
 
+(use-package yaml-mode
+   :ensure t)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

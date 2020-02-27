@@ -79,6 +79,8 @@
 (setq ruby-deep-indent-paren-style nil)
 (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\Gemfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\Schemafile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\ruby$" . ruby-mode))
 
 (add-hook 'ruby-mode-hook '(lambda()
   (rubocop-mode)

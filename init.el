@@ -153,6 +153,7 @@
 
 (use-package ivy
   :config
+  (setq counsel-find-file-at-point t)
   (setq ivy-use-virtual-buffers t)
   (setq ivy-height 20)
   (ivy-mode)

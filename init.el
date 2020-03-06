@@ -64,7 +64,7 @@
 (package-refresh-contents)
 (defvar my/favorite-packages
   '(auto-complete rubocop exec-path-from-shell direnv
-    rbenv yasnippet dumb-jump rg dired-subtree ivy counsel
+    rbenv yasnippet dumb-jump dired-subtree ivy counsel
     slim-mode string-inflection
     coffee-mode wgrep dashboard paradox web-mode
     projectile projectile-rails spaceline tide
@@ -267,18 +267,12 @@
   (key-chord-define-global "i9" 'insert-current-date)
   (key-chord-define-global "fp" 'file-full-path)
   (key-chord-define-global "cy" 'string-inflection-ruby-style-cycle)
-  (key-chord-define-global "rg" 'rg2)
   (key-chord-define-global "o0" 'open-current-buffer-file)
 )
 
-(use-package rg
-  :if (file-exists-p "/usr/local/bin/rg")
-  :config
-  (rg-define-search rg2 "Search files in current directory"
-    :query ask
-    :format regexp
-    :files "everything"
-    :dir current))
+(use-package ripgrep
+  :ensure t
+  :if (file-exists-p "/usr/local/bin/rg"))
 
 (use-package dumb-jump
   :config

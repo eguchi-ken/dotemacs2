@@ -318,17 +318,22 @@
          (typescript-mode . tide-hl-identifier-mode)
          (before-save . tide-format-before-save)))
 
+(use-package yasnippet
+  :ensure
+  :bind (("s-y" . yas-insert-snippet)))
+
 (use-package rspec-mode
+  :after (yasnippet)
   :config
   ;; @see https://github.com/pezra/rspec-mode#debugging
   (add-hook 'after-init-hook 'inf-ruby-switch-setup)
-  (setq rspec-use-spring-when-possible nil))
+  (setq rspec-use-spring-when-possible nil)
+  (rspec-install-snippets)
+  (add-hook 'rspec-mode-hook #'yas-minor-mode))
 
 (use-package yaml-mode
    :ensure)
 
-(use-package yasnippet
-   :ensure)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

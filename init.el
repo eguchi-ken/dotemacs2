@@ -228,7 +228,7 @@
 )
 
 (use-package magit
-  :ensure t
+  :ensure
   :config
   (setq magit-completing-read-function 'ivy-completing-read)
   (remove-hook 'magit-refs-sections-hook 'magit-insert-tags))
@@ -266,11 +266,11 @@
 )
 
 (use-package ripgrep
-  :ensure t
+  :ensure
   :if (file-exists-p "/usr/local/bin/rg"))
 
 (use-package dumb-jump
-  :ensure t
+  :ensure
   :config
   (setq dumb-jump-force-searcher 'rg)
   (setq dumb-jump-selector 'ivy)
@@ -289,7 +289,7 @@
 )
 
 (use-package paradox
- :ensure t
+ :ensure
  :custom
  (paradox-github-token t))
 
@@ -312,7 +312,7 @@
   (setq js-indent-level 2))
 
 (use-package tide
-  :ensure t
+  :ensure
   :after (typescript-mode company flycheck)
   :hook ((typescript-mode . tide-setup)
          (typescript-mode . tide-hl-identifier-mode)
@@ -325,7 +325,7 @@
   (setq rspec-use-spring-when-possible nil))
 
 (use-package yaml-mode
-   :ensure t)
+   :ensure)
 
 (use-package yasnippet
    :ensure)

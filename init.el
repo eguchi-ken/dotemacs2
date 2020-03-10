@@ -47,7 +47,7 @@
 (global-set-key (kbd "C-c l") 'toggle-truncate-lines)      ; 行末で折り返す <-> 折り返さない
 
 (setq my-font (if (member "Ricty" (font-family-list)) "Ricty" "Monaco"))
-(set-face-attribute 'default nil :family my-font :height 150)
+(set-face-attribute 'default nil :family my-font :height 200)
 (set-fontset-font t 'japanese-jisx0208 (font-spec :family my-font)) ; これがないと一部の漢字のフォントがおかしくなる
 
 (fset 'yes-or-no-p 'y-or-n-p) ; yes or no の質問を y, n で答えられるようにする
@@ -64,7 +64,7 @@
 (package-refresh-contents)
 (defvar my/favorite-packages
   '(auto-complete rubocop exec-path-from-shell direnv
-    rbenv yasnippet dired-subtree ivy counsel
+    rbenv dired-subtree ivy counsel
     slim-mode string-inflection
     coffee-mode wgrep dashboard paradox web-mode
     projectile projectile-rails spaceline tide
@@ -96,11 +96,6 @@
 (defun ~ruby-fix-syntax-propertize ()
   (add-function :before (local 'syntax-propertize-function) '~ruby-syntax-propertize-function))
 (add-hook 'ruby-mode-hook '~ruby-fix-syntax-propertize t)
-
-
-
-(yas-global-mode 1)
-(setq yas-prompt-functions '(yas-ido-prompt))
 
 (defun insert-current-date (&optional diff)
   "日にちをカレントバッファに出力します"
@@ -264,7 +259,6 @@
   (key-chord-define-global "bm" 'bookmark-jump)
   (key-chord-define-global "dj" 'dumb-jump-go)
   (key-chord-define-global "p@" 'dumb-jump-go-prompt)
-  (key-chord-define-global "y7" 'yas-insert-snippet)
   (key-chord-define-global "i9" 'insert-current-date)
   (key-chord-define-global "fp" 'file-full-path)
   (key-chord-define-global "cy" 'string-inflection-ruby-style-cycle)
@@ -280,7 +274,12 @@
   :config
   (setq dumb-jump-force-searcher 'rg)
   (setq dumb-jump-selector 'ivy)
-  (dumb-jump-mode))
+  :bind (("M-g o" . dumb-jump-go-other-window)
+         ("M-g j" . dumb-jump-go)
+         ("M-g b" . dumb-jump-back)
+         ("M-g i" . dumb-jump-go-prompt)
+         ("M-g x" . dumb-jump-go-prefer-external)
+         ("M-g z" . dumb-jump-go-prefer-external-other-window)))
 
 (use-package spaceline-config
   :config
@@ -328,6 +327,9 @@
 (use-package yaml-mode
    :ensure t)
 
+(use-package yasnippet
+   :ensure)
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -335,3 +337,11 @@
  ;; If there is more than one, they won't work right.
  '(org-level-1 ((t (:inherit nil :foreground "#ae81ff" :height 1.0))))
  '(org-level-2 ((t (:inherit nil :foreground "#ccccff" :height 1.0)))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (wgrep ripgrep yaml-mode web-mode use-package twittering-mode tide spaceline smex slim-mode rubocop rspec-mode rjsx-mode restclient rebecca-theme rbenv projectile-rails paradox nvm key-chord jest idomenu ido-vertical-mode ido-completing-read+ gist forge exec-path-from-shell evil-string-inflection dumb-jump doom-modeline direnv dired-subtree dashboard csv-mode counsel coffee-mode auto-complete atom-one-dark-theme))))

@@ -68,7 +68,7 @@
     slim-mode string-inflection
     coffee-mode wgrep dashboard paradox web-mode
     projectile projectile-rails spaceline tide
-    use-package magit forge key-chord rebecca-theme wdired))
+    use-package forge key-chord rebecca-theme wdired))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
     (package-install package)))
@@ -233,6 +233,7 @@
 )
 
 (use-package magit
+  :ensure t
   :config
   (setq magit-completing-read-function 'ivy-completing-read)
   (remove-hook 'magit-refs-sections-hook 'magit-insert-tags))

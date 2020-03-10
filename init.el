@@ -64,7 +64,7 @@
 (package-refresh-contents)
 (defvar my/favorite-packages
   '(auto-complete rubocop exec-path-from-shell direnv
-    rbenv yasnippet dumb-jump dired-subtree ivy counsel
+    rbenv yasnippet dired-subtree ivy counsel
     slim-mode string-inflection
     coffee-mode wgrep dashboard paradox web-mode
     projectile projectile-rails spaceline tide
@@ -276,10 +276,11 @@
   :if (file-exists-p "/usr/local/bin/rg"))
 
 (use-package dumb-jump
+  :ensure t
   :config
   (setq dumb-jump-force-searcher 'rg)
   (setq dumb-jump-selector 'ivy)
-)
+  (dumb-jump-mode))
 
 (use-package spaceline-config
   :config

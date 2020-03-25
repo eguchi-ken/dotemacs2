@@ -334,6 +334,12 @@
 (use-package yaml-mode
    :ensure)
 
+(use-package go-mode
+  :config
+  (add-hook 'go-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode 1)
+            (setq tab-width 2))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

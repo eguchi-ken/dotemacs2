@@ -344,7 +344,7 @@
 (defun replace-org-to-markdown ()
   (interactive)
   (save-excursion
-    (let (replacement from to)
+    (let (replacement)
       (setq replacement
             '("^* "                                "# "
               "^** "                               "## "

@@ -341,6 +341,23 @@
             (setq indent-tabs-mode 1)
             (setq tab-width 2))))
 
+(defun replace-org-to-markdown ()
+  (interactive)
+  (save-excursion
+    (let (replacement from to)
+      (setq replacement
+            '("^* "                                "# "
+              "^** "                               "## "
+              "^*** "                              "### "
+              "^**** "                             "#### "
+              "^***** "                            "##### "
+              "#\\+BEGIN_SRC"                      "```"
+              "#\\+END_SRC"                        "```"
+              "\\[\\[\\(.+\\)\\]\\[\\(.+\\)\\]\\]" "[\\2](\\1)"))
+      (while replacement
+        (goto-char (point-min))
+        (replace-regexp (pop replacement) (pop replacement))))))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -274,12 +274,12 @@
   :config
   (setq dumb-jump-force-searcher 'rg)
   (setq dumb-jump-selector 'ivy)
-  :bind (("M-g o" . dumb-jump-go-other-window)
-         ("M-g j" . dumb-jump-go)
-         ("M-g b" . dumb-jump-back)
-         ("M-g i" . dumb-jump-go-prompt)
-         ("M-g x" . dumb-jump-go-prefer-external)
-         ("M-g z" . dumb-jump-go-prefer-external-other-window)))
+  :bind (("M-g M-o" . dumb-jump-go-other-window)
+         ("M-g M-j" . dumb-jump-go)
+         ("M-g M-b" . dumb-jump-back)
+         ("M-g M-i" . dumb-jump-go-prompt)
+         ("M-g M-x" . dumb-jump-go-prefer-external)
+         ("M-g M-z" . dumb-jump-go-prefer-external-other-window)))
 
 (use-package spaceline-config
   :config

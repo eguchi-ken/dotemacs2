@@ -32,6 +32,7 @@
   (setq org-indent-indentation-per-level 8)
   (setq org-todo-keywords '((sequence "TODO" "DOING" "|" "DONE")))
   (local-unset-key (kbd "M-h"))    ; org-mode の M-h を利用しない。
+  (local-unset-key (kbd "C-M-t"))
   (org-indent-mode t)              ; インデントをヘッダに合わせる。
   ))
 
@@ -257,7 +258,6 @@
   (key-chord-define-global "fd" 'find-file)
   (key-chord-define-global "gh" 'magit-status)
   (key-chord-define-global "sd" 'save-buffer)
-  (key-chord-define-global "bm" 'bookmark-jump)
   (key-chord-define-global "dj" 'dumb-jump-go)
   (key-chord-define-global "p@" 'dumb-jump-go-prompt)
   (key-chord-define-global "i9" 'insert-current-date)

@@ -109,16 +109,28 @@
        (or diff 0)))))
 
 (defun file-full-path ()
-  "今開いているファイルの絶対パス::行数をクリップボードにコピーします"
+  "今開いているファイルの絶対パス::行数を返します"
+  (if (equal major-mode 'dired-mode)
+      default-directory
+    (concat (buffer-file-name) "::" (number-to-string (line-number-at-pos)))))
+
+(defun to-clipboard (x)
+  "与えられた文字列をクリップボードにコピーします"
+  (when x
+    (with-temp-buffer
+      (insert x)
+      (clipboard-kill-region (point-min) (point-max)))
+    (message x)))
+
+(defun file-full-path-to-clipboard ()
+  "今開いているファイルの org link をクリップボードにコピーします"
   (interactive)
-  (let ((filename (if (equal major-mode 'dired-mode)
-                      default-directory
-                    (concat (buffer-file-name) "::" (number-to-string (line-number-at-pos))))))
-    (when filename
-      (with-temp-buffer
-        (insert filename)
-        (clipboard-kill-region (point-min) (point-max)))
-      (message filename))))
+  (to-clipboard (file-full-path)))
+
+(defun file-full-path-org-link-to-clipboard ()
+  "今開いているファイルの org link をクリップボードにコピーします"
+  (interactive)
+  (to-clipboard (concatenate 'string "[[" (file-full-path) "][これ]]")))
 
 (defun open-current-buffer-file ()
   "今開いているファイルを open します"
@@ -261,7 +273,7 @@
   (key-chord-define-global "dj" 'dumb-jump-go)
   (key-chord-define-global "p@" 'dumb-jump-go-prompt)
   (key-chord-define-global "i9" 'insert-current-date)
-  (key-chord-define-global "fp" 'file-full-path)
+  (key-chord-define-global "fp" 'file-full-path-org-link-to-clipboard)
   (key-chord-define-global "cy" 'string-inflection-ruby-style-cycle)
   (key-chord-define-global "o0" 'open-current-buffer-file)
 )

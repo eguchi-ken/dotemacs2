@@ -131,7 +131,7 @@
 (defun file-full-path-org-link-to-clipboard ()
   "今開いているファイルの org link をクリップボードにコピーします"
   (interactive)
-  (to-clipboard (concatenate 'string "[[" (file-full-path) "][これ]]")))
+  (to-clipboard (concatenate 'string "[[" (file-full-path) "][" (file-name-nondirectory buffer-file-name) "]]")))
 
 (defun open-current-buffer-file ()
   "今開いているファイルを open します"

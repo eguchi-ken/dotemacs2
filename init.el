@@ -336,6 +336,10 @@
   :ensure
   :bind (("s-y" . yas-insert-snippet)))
 
+(use-package ruby-electric
+  :ensure
+  :hook ((ruby-mode . ruby-electric-mode)))
+
 (use-package rspec-mode
   :after (yasnippet)
   :config

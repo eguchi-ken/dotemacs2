@@ -81,7 +81,7 @@
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (defvar my/favorite-packages
-  '(rubocop direnv
+  '(direnv
     rbenv dired-subtree ivy counsel
     slim-mode string-inflection
     coffee-mode wgrep dashboard paradox web-mode
@@ -99,11 +99,6 @@
 (add-to-list 'auto-mode-alist '("\\Gemfile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\Schemafile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\ruby$" . ruby-mode))
-
-(add-hook 'ruby-mode-hook '(lambda()
-  (rubocop-mode)
-  (local-set-key (kbd "C-c , R") 'rubocop-autocorrect-current-file)
-))
 
 ;; https://qiita.com/eggc/items/718dd41fa778b91f302e
 (defalias '~ruby-syntax-propertize-function
@@ -131,6 +126,13 @@
 (global-set-key (kbd "s-q") 'version)                      ; 誤操作防止用
 (global-set-key (kbd "M-i") 'imenu)
 (global-set-key (kbd "C-s-f") 'toggle-frame-fullscreen)
+
+(use-package rubocop
+  :ensure
+  :config
+  (add-hook 'ruby-mode-hook '(lambda()
+  (rubocop-mode)
+  (local-set-key (kbd "C-c , R") 'rubocop-autocorrect-current-file))))
 
 (use-package recentf
   :config

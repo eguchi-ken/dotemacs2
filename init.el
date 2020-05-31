@@ -80,17 +80,6 @@
 (package-initialize)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(defvar my/favorite-packages
-  '(
-    slim-mode string-inflection
-    coffee-mode wgrep dashboard paradox web-mode
-    spaceline tide
-    forge key-chord rebecca-theme wdired))
-(dolist (package my/favorite-packages)
-  (unless (package-installed-p package)
-    (package-install package)))
-
-(load-theme 'rebecca t)
 
 (setq ruby-insert-encoding-magic-comment nil)
 (setq ruby-deep-indent-paren-style nil)
@@ -128,6 +117,10 @@
 
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
+
+(use-package rebecca-theme
+  :config
+  (load-theme 'rebecca t))
 
 (use-package rubocop
   :config
@@ -278,6 +271,7 @@
          ("M-g M-x" . dumb-jump-go-prefer-external)
          ("M-g M-z" . dumb-jump-go-prefer-external-other-window)))
 
+(use-package spaceline)
 (use-package spaceline-config
   :ensure nil
   :config
@@ -332,6 +326,9 @@
 (use-package yaml-mode)
 
 (use-package go-mode)
+(use-package slim-mode)
+(use-package string-inflection)
+
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

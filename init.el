@@ -13,17 +13,6 @@
   (load bootstrap-file nil 'nomessage))
 (straight-use-package 'use-package)
 
-(add-hook 'org-mode-hook (lambda ()
-  (setq org-agenda-files '("~/work/text/report.org"))
-  (setq org-hide-leading-stars t)
-  (setq org-hide-emphasis-markers t)
-  (setq org-indent-indentation-per-level 8)
-  (setq org-todo-keywords '((sequence "TODO" "DOING" "|" "DONE")))
-  (local-unset-key (kbd "M-h"))    ; org-mode の M-h を利用しない。
-  (local-unset-key (kbd "C-M-t"))
-  (org-indent-mode t)              ; インデントをヘッダに合わせる。
-  ))
-
 (defun other-window-back ()
   (interactive)
   (other-window -1))
@@ -85,6 +74,19 @@
 (use-package rebecca-theme
   :config
   (load-theme 'rebecca t))
+
+(use-package org
+  :ensure nil
+  :config
+  (add-hook 'org-mode-hook (lambda ()
+  (setq org-agenda-files '("~/work/text/report.org"))
+  (setq org-hide-leading-stars t)
+  (setq org-hide-emphasis-markers t)
+  (setq org-indent-indentation-per-level 8)
+  (setq org-todo-keywords '((sequence "TODO" "DOING" "|" "DONE")))
+  (local-unset-key (kbd "M-h"))
+  (local-unset-key (kbd "C-M-t"))
+  (org-indent-mode t))))
 
 (use-package rubocop
   :config

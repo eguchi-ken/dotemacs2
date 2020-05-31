@@ -66,11 +66,11 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-refresh-contents)
 (defvar my/favorite-packages
-  '(auto-complete rubocop exec-path-from-shell direnv
+  '(auto-complete rubocop direnv
     rbenv dired-subtree ivy counsel
     slim-mode string-inflection
     coffee-mode wgrep dashboard paradox web-mode
-    projectile projectile-rails spaceline tide
+    spaceline tide
     use-package forge key-chord rebecca-theme wdired))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
@@ -185,6 +185,7 @@
 (use-package wdired)
 
 (use-package exec-path-from-shell
+  :ensure
   :if (memq window-system '(mac ns x))
   :config
   (exec-path-from-shell-initialize))
@@ -214,6 +215,7 @@
 )
 
 (use-package projectile
+  :ensure
   :config
   (setq projectile-project-search-path '("~/"))
   (setq projectile-completion-system 'ivy)
@@ -223,9 +225,10 @@
   ("s-p" . projectile-command-map))
 
 (use-package projectile-rails
+  :ensure
+  :after (projectile)
   :config
-  (projectile-rails-global-mode)
-  )
+  (projectile-rails-global-mode))
 
 (use-package dashboard
   :config

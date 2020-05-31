@@ -82,7 +82,7 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (defvar my/favorite-packages
   '(
-    rbenv dired-subtree ivy counsel
+    dired-subtree ivy counsel
     slim-mode string-inflection
     coffee-mode wgrep dashboard paradox web-mode
     spaceline tide
@@ -180,10 +180,10 @@
 
 ; https://github.com/senny/rbenv.el
 (use-package rbenv
+  :ensure
   :config
   (setq rbenv-show-active-ruby-in-modeline nil)
-  (global-rbenv-mode)
-)
+  (global-rbenv-mode))
 
 (use-package wgrep
   :config

@@ -82,7 +82,7 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (defvar my/favorite-packages
   '(
-    dired-subtree ivy counsel
+    ivy counsel
     slim-mode string-inflection
     coffee-mode wgrep dashboard paradox web-mode
     spaceline tide
@@ -160,7 +160,7 @@
               ("<backtab>" . 'dired-subtree-remove)
               ("h" . 'dired-subtree-remove)
               ("r" . 'wdired-change-to-wdired-mode)))
-(use-package dired-subtree)
+(use-package dired-subtree :ensure)
 (use-package wdired)
 
 (use-package exec-path-from-shell

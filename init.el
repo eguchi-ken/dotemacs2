@@ -81,7 +81,7 @@
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (defvar my/favorite-packages
-  '(direnv
+  '(
     rbenv dired-subtree ivy counsel
     slim-mode string-inflection
     coffee-mode wgrep dashboard paradox web-mode
@@ -244,6 +244,7 @@
           ("Title" 35 t nil title  nil))))
 
 (use-package direnv
+  :ensure
   :if (file-exists-p "/usr/local/bin/direnv")
   :config
   (setq direnv-always-show-summary nil)

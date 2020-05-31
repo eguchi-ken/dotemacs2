@@ -202,6 +202,7 @@
   :ensure
   :if (memq window-system '(mac ns x))
   :config
+  (setq exec-path-from-shell-arguments ())
   (exec-path-from-shell-initialize))
 
 (use-package coffee-mode

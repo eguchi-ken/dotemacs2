@@ -32,25 +32,7 @@
 (add-hook 'occur-mode-hook (lambda ()
   (next-error-follow-minor-mode)
   (local-set-key (kbd "n") 'next-line)
-  (local-set-key (kbd "p") 'previous-line)
- ))
-
-(setq ruby-insert-encoding-magic-comment nil)
-(setq ruby-deep-indent-paren-style nil)
-(add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\Gemfile$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\Schemafile$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\ruby$" . ruby-mode))
-
-;; https://qiita.com/eggc/items/718dd41fa778b91f302e
-(defalias '~ruby-syntax-propertize-function
-  (syntax-propertize-rules
-   ;; 文字列2重展開があるとシンタックスハイライトがおかしくなるので、 ruby-expression-expansion-re を修正したやつを追加
-   ("\\(?:[^\\]\\|\\=\\)\\(\\\\\\\\\\)*\\(#{[^{^}]*#{[^}]*}[^}]*}\\)\\|\\(#\\({[^}\n\\\\]*\\(\\\\.[^}\n\\\\]*\\)*}\\|\\(\\$\\|@\\|@@\\)\\(\\w\\|_\\)+\\|\\$[^a-zA-Z \n]\\)\\)"
-    (0 (ignore (ruby-syntax-propertize-expansion))))))
-(defun ~ruby-fix-syntax-propertize ()
-  (add-function :before (local 'syntax-propertize-function) '~ruby-syntax-propertize-function))
-(add-hook 'ruby-mode-hook '~ruby-fix-syntax-propertize t)
+  (local-set-key (kbd "p") 'previous-line)))
 
 (global-set-key (kbd "s-f") 'find-file)                    ; C-x C-f
 (global-set-key (kbd "s-b") 'switch-to-buffer)             ; C-x b
@@ -87,6 +69,25 @@
   (local-unset-key (kbd "M-h"))
   (local-unset-key (kbd "C-M-t"))
   (org-indent-mode t))))
+
+(use-package ruby-mode
+  :ensure nil
+  :config
+  (setq ruby-insert-encoding-magic-comment nil)
+  (setq ruby-deep-indent-paren-style nil)
+  (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
+  (add-to-list 'auto-mode-alist '("\\Gemfile$" . ruby-mode))
+  (add-to-list 'auto-mode-alist '("\\Schemafile$" . ruby-mode))
+  (add-to-list 'auto-mode-alist '("\\ruby$" . ruby-mode))
+  ;; https://qiita.com/eggc/items/718dd41fa778b91f302e
+  (defalias '~ruby-syntax-propertize-function
+    (syntax-propertize-rules
+     ;; 文字列2重展開があるとシンタックスハイライトがおかしくなるので、 ruby-expression-expansion-re を修正したやつを追加
+     ("\\(?:[^\\]\\|\\=\\)\\(\\\\\\\\\\)*\\(#{[^{^}]*#{[^}]*}[^}]*}\\)\\|\\(#\\({[^}\n\\\\]*\\(\\\\.[^}\n\\\\]*\\)*}\\|\\(\\$\\|@\\|@@\\)\\(\\w\\|_\\)+\\|\\$[^a-zA-Z \n]\\)\\)"
+      (0 (ignore (ruby-syntax-propertize-expansion))))))
+  (defun ~ruby-fix-syntax-propertize ()
+    (add-function :before (local 'syntax-propertize-function) '~ruby-syntax-propertize-function))
+  (add-hook 'ruby-mode-hook '~ruby-fix-syntax-propertize t))
 
 (use-package rubocop
   :config

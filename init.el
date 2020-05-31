@@ -127,8 +127,10 @@
 (global-set-key (kbd "M-i") 'imenu)
 (global-set-key (kbd "C-s-f") 'toggle-frame-fullscreen)
 
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
+
 (use-package rubocop
-  :ensure
   :config
   (add-hook 'ruby-mode-hook '(lambda()
   (rubocop-mode)
@@ -149,6 +151,7 @@
   (counsel-mode))
 
 (use-package dired
+  :ensure nil
   :config
   (setq dired-use-ls-dired nil)
   (setq dired-dwim-target t) ; 2個のdiredバッファがある時、コピー/移動先のパスを他方のバッファにする
@@ -160,11 +163,10 @@
               ("<backtab>" . 'dired-subtree-remove)
               ("h" . 'dired-subtree-remove)
               ("r" . 'wdired-change-to-wdired-mode)))
-(use-package dired-subtree :ensure)
+(use-package dired-subtree)
 (use-package wdired)
 
 (use-package exec-path-from-shell
-  :ensure
   :if (memq window-system '(mac ns x))
   :config
   (setq exec-path-from-shell-arguments ())
@@ -180,7 +182,6 @@
 
 ; https://github.com/senny/rbenv.el
 (use-package rbenv
-  :ensure
   :config
   (setq rbenv-show-active-ruby-in-modeline nil)
   (global-rbenv-mode))
@@ -196,7 +197,6 @@
 )
 
 (use-package projectile
-  :ensure
   :config
   (setq projectile-project-search-path '("~/"))
   (setq projectile-completion-system 'ivy)
@@ -206,7 +206,6 @@
   ("s-p" . projectile-command-map))
 
 (use-package projectile-rails
-  :ensure
   :after (projectile)
   :config
   (projectile-rails-global-mode))
@@ -216,9 +215,9 @@
   (setq dashboard-set-init-info t)
   (dashboard-setup-startup-hook))
 
-(use-package auto-complete
-  :ensure)
+(use-package auto-complete)
 (use-package auto-complete-config
+  :ensure nil
   :config
   (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
   (global-auto-complete-mode t)
@@ -228,7 +227,6 @@
 )
 
 (use-package magit
-  :ensure
   :config
   (setq magit-completing-read-function 'ivy-completing-read)
   (remove-hook 'magit-refs-sections-hook 'magit-insert-tags))
@@ -244,7 +242,6 @@
           ("Title" 35 t nil title  nil))))
 
 (use-package direnv
-  :ensure
   :if (file-exists-p "/usr/local/bin/direnv")
   :config
   (setq direnv-always-show-summary nil)
@@ -266,11 +263,9 @@
 )
 
 (use-package ripgrep
-  :ensure
   :if (file-exists-p "/usr/local/bin/rg"))
 
 (use-package dumb-jump
-  :ensure
   :config
   (setq dumb-jump-force-searcher 'rg)
   (setq dumb-jump-selector 'ivy)
@@ -282,6 +277,7 @@
          ("M-g M-z" . dumb-jump-go-prefer-external-other-window)))
 
 (use-package spaceline-config
+  :ensure nil
   :config
   (spaceline-emacs-theme)
   (spaceline-toggle-minor-modes-off)
@@ -289,7 +285,6 @@
 )
 
 (use-package paradox
- :ensure
  :custom
  (paradox-github-token t))
 
@@ -312,18 +307,15 @@
   (setq js-indent-level 2))
 
 (use-package tide
-  :ensure
   :after (typescript-mode company flycheck)
   :hook ((typescript-mode . tide-setup)
          (typescript-mode . tide-hl-identifier-mode)
          (before-save . tide-format-before-save)))
 
 (use-package yasnippet
-  :ensure
   :bind (("s-y" . yas-insert-snippet)))
 
 (use-package ruby-electric
-  :ensure
   :hook ((ruby-mode . ruby-electric-mode)))
 
 (use-package rspec-mode
@@ -335,11 +327,9 @@
   (rspec-install-snippets)
   (add-hook 'rspec-mode-hook #'yas-minor-mode))
 
-(use-package yaml-mode
-   :ensure)
+(use-package yaml-mode)
 
-(use-package go-mode
-  :config
+(use-package go-mode)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

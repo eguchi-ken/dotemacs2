@@ -40,7 +40,6 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 (straight-use-package 'use-package)
-(straight-use-package '(eguchi-ken :type git :host github :repo "eguchi-ken/eguchi-ken.el"))
 
 (add-hook 'org-mode-hook (lambda ()
   (setq org-agenda-files '("~/work/text/report.org"))
@@ -117,6 +116,9 @@
 
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
+
+(use-package eguchi-ken
+  :straight (eguchi-ken :type git :host github :repo "eguchi-ken/eguchi-ken.el"))
 
 (use-package rebecca-theme
   :config

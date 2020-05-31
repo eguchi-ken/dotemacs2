@@ -82,7 +82,6 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (defvar my/favorite-packages
   '(
-    ivy counsel
     slim-mode string-inflection
     coffee-mode wgrep dashboard paradox web-mode
     spaceline tide
@@ -147,7 +146,10 @@
   (setq counsel-find-file-at-point t)
   (setq ivy-use-virtual-buffers t)
   (setq ivy-height 20)
-  (ivy-mode)
+  (ivy-mode))
+
+(use-package counsel
+  :config
   (counsel-mode))
 
 (use-package dired

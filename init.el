@@ -26,6 +26,21 @@
 ;; http://hylom.net/emacs-25.1-ime-flicker-problem
 (if (version<= emacs-version "26.1") (setq redisplay-dont-pause nil))
 
+;; bootstrap straight https://github.com/raxod502/straight.el#getting-started
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+(straight-use-package 'use-package)
+
 (add-hook 'org-mode-hook (lambda ()
   (setq org-agenda-files '("~/work/text/report.org"))
   (setq org-hide-leading-stars t)
@@ -70,7 +85,7 @@
     slim-mode string-inflection
     coffee-mode wgrep dashboard paradox web-mode
     spaceline tide
-    use-package forge key-chord rebecca-theme wdired))
+    forge key-chord rebecca-theme wdired))
 (dolist (package my/favorite-packages)
   (unless (package-installed-p package)
     (package-install package)))

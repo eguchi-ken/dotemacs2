@@ -81,7 +81,7 @@
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (defvar my/favorite-packages
-  '(auto-complete rubocop direnv
+  '(rubocop direnv
     rbenv dired-subtree ivy counsel
     slim-mode string-inflection
     coffee-mode wgrep dashboard paradox web-mode
@@ -169,6 +169,7 @@
   (exec-path-from-shell-initialize))
 
 (use-package coffee-mode
+  :after (auto-complete)
   :config
   (add-hook 'coffee-mode-hook (lambda()
     (auto-complete-mode)
@@ -213,7 +214,8 @@
   (setq dashboard-set-init-info t)
   (dashboard-setup-startup-hook))
 
-(use-package auto-complete)
+(use-package auto-complete
+  :ensure)
 (use-package auto-complete-config
   :config
   (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)

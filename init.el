@@ -57,6 +57,13 @@
   :config
   (load-theme 'rebecca t))
 
+(use-package view
+  :ensure nil
+  :bind (:map view-mode-map
+              ("j" . next-line)
+              ("k" . previous-line)
+              ("i" . view-mode)))
+
 (use-package org
   :ensure nil
   :config
@@ -213,7 +220,6 @@
   :config
   (setq key-chord-two-keys-delay 0.04)
   (key-chord-mode 1)
-  (key-chord-define-global "fd" 'find-file)
   (key-chord-define-global "gh" 'magit-status)
   (key-chord-define-global "sd" 'save-buffer)
   (key-chord-define-global "dj" 'dumb-jump-go)
@@ -222,6 +228,7 @@
   (key-chord-define-global "fp" 'file-full-path-org-link-to-clipboard)
   (key-chord-define-global "cy" 'string-inflection-ruby-style-cycle)
   (key-chord-define-global "o0" 'open-current-buffer-file)
+  (key-chord-define-global "kj" 'view-mode)
 )
 
 (use-package ripgrep

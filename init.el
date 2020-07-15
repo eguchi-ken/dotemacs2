@@ -238,6 +238,7 @@
   :config
   (setq dumb-jump-force-searcher 'rg)
   (setq dumb-jump-selector 'ivy)
+  (setq dumb-jump-max-find-time 5)
   :bind (("M-g M-o" . dumb-jump-go-other-window)
          ("M-g M-j" . dumb-jump-go)
          ("M-g M-b" . dumb-jump-back)

@@ -304,6 +304,7 @@
 (use-package slim-mode)
 (use-package string-inflection)
 
+(use-package rotate)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

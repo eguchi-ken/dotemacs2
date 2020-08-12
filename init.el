@@ -305,6 +305,7 @@
 (use-package string-inflection)
 
 (use-package rotate)
+(use-package graphql-mode)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

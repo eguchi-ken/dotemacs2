@@ -85,16 +85,20 @@
   (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
   (add-to-list 'auto-mode-alist '("\\Gemfile$" . ruby-mode))
   (add-to-list 'auto-mode-alist '("\\Schemafile$" . ruby-mode))
+  (add-to-list 'auto-mode-alist '("\\Steepfile$" . ruby-mode))
   (add-to-list 'auto-mode-alist '("\\ruby$" . ruby-mode))
-  ;; https://qiita.com/eggc/items/718dd41fa778b91f302e
-  (defalias '~ruby-syntax-propertize-function
-    (syntax-propertize-rules
-     ;; 文字列2重展開があるとシンタックスハイライトがおかしくなるので、 ruby-expression-expansion-re を修正したやつを追加
-     ("\\(?:[^\\]\\|\\=\\)\\(\\\\\\\\\\)*\\(#{[^{^}]*#{[^}]*}[^}]*}\\)\\|\\(#\\({[^}\n\\\\]*\\(\\\\.[^}\n\\\\]*\\)*}\\|\\(\\$\\|@\\|@@\\)\\(\\w\\|_\\)+\\|\\$[^a-zA-Z \n]\\)\\)"
-      (0 (ignore (ruby-syntax-propertize-expansion))))))
-  (defun ~ruby-fix-syntax-propertize ()
+  (add-to-list 'auto-mode-alist '("\\rbs$" . ruby-mode))
+  :init
+  (defun ruby-mode-custom-hook ()
+    (interactive)
+    ;; https://qiita.com/eggc/items/718dd41fa778b91f302e
+    (defalias '~ruby-syntax-propertize-function
+      (syntax-propertize-rules
+       ;; 文字列2重展開があるとシンタックスハイライトがおかしくなるので、 ruby-expression-expansion-re を修正したやつを追加
+       ("\\(?:[^\\]\\|\\=\\)\\(\\\\\\\\\\)*\\(#{[^{^}]*#{[^}]*}[^}]*}\\)\\|\\(#\\({[^}\n\\\\]*\\(\\\\.[^}\n\\\\]*\\)*}\\|\\(\\$\\|@\\|@@\\)\\(\\w\\|_\\)+\\|\\$[^a-zA-Z \n]\\)\\)"
+        (0 (ignore (ruby-syntax-propertize-expansion))))))
     (add-function :before (local 'syntax-propertize-function) '~ruby-syntax-propertize-function))
-  (add-hook 'ruby-mode-hook '~ruby-fix-syntax-propertize t))
+  :hook (ruby-mode . ruby-mode-custom-hook))
 
 (use-package rubocop
   :config

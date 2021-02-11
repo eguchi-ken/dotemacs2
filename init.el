@@ -146,10 +146,8 @@
   (exec-path-from-shell-initialize))
 
 (use-package coffee-mode
-  :after (auto-complete)
   :config
   (add-hook 'coffee-mode-hook (lambda()
-    (auto-complete-mode)
     (setq coffee-tab-width 2))
 ))
 
@@ -188,16 +186,8 @@
   (setq dashboard-set-init-info t)
   (dashboard-setup-startup-hook))
 
-(use-package auto-complete)
-(use-package auto-complete-config
-  :ensure nil
-  :config
-  (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
-  (global-auto-complete-mode t)
-  (ac-config-default)
-  (setq ac-ignore-case nil) ; auto-complete で大文字小文字を区別する。
-  (setq ac-auto-start 4)
-)
+(use-package company
+  :init (global-company-mode))
 
 (use-package magit
   :config
@@ -270,7 +260,6 @@
   (add-to-list 'auto-mode-alist '("\\.ts[x]?$" . web-mode))
   (setq web-mode-content-types-alist '(("jsx"  . ".js[x]?\\'")))
   (add-hook 'web-mode-hook (lambda()
-    (auto-complete-mode)
     (setq web-mode-code-indent-offset 2)
     (setq web-mode-markup-indent-offset 2))))
 
@@ -345,4 +334,4 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (wgrep ripgrep yaml-mode web-mode use-package twittering-mode tide spaceline smex slim-mode rubocop rspec-mode rjsx-mode restclient rebecca-theme rbenv projectile-rails paradox nvm key-chord jest idomenu ido-vertical-mode ido-completing-read+ gist forge exec-path-from-shell evil-string-inflection dumb-jump doom-modeline direnv dired-subtree dashboard csv-mode counsel coffee-mode auto-complete atom-one-dark-theme))))
+    (wgrep ripgrep yaml-mode web-mode use-package twittering-mode tide spaceline smex slim-mode rubocop rspec-mode rjsx-mode restclient rebecca-theme rbenv projectile-rails paradox nvm key-chord jest idomenu ido-vertical-mode ido-completing-read+ gist forge exec-path-from-shell evil-string-inflection dumb-jump doom-modeline direnv dired-subtree dashboard csv-mode counsel coffee-mode atom-one-dark-theme))))

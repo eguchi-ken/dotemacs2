@@ -108,7 +108,7 @@
 
 (use-package recentf
   :config
-  (setq recentf-max-saved-items 2000)
+  (setq recentf-max-saved-items 3000)
   (setq recentf-auto-cleanup 'never)
   (recentf-mode 1))
 

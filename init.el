@@ -217,7 +217,7 @@
   (key-chord-mode 1)
   (key-chord-define-global "gh" 'magit-status)
   (key-chord-define-global "sd" 'save-buffer)
-  (key-chord-define-global "dj" 'dumb-jump-go)
+  (key-chord-define-global "dj" 'xref-find-definitions)
   (key-chord-define-global "p@" 'dumb-jump-go-prompt)
   (key-chord-define-global "i9" 'insert-current-date)
   (key-chord-define-global "fp" 'file-full-path-org-link-to-clipboard)
@@ -234,13 +234,7 @@
   (setq dumb-jump-force-searcher 'rg)
   (setq dumb-jump-selector 'ivy)
   (setq dumb-jump-max-find-time 5)
-  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
-  :bind (("M-g M-o" . dumb-jump-go-other-window)
-         ("M-g M-j" . dumb-jump-go)
-         ("M-g M-b" . dumb-jump-back)
-         ("M-g M-i" . dumb-jump-go-prompt)
-         ("M-g M-x" . dumb-jump-go-prefer-external)
-         ("M-g M-z" . dumb-jump-go-prefer-external-other-window)))
+  :hook ((xref-backend-functions . dumb-jump-xref-activate)))
 
 (use-package spaceline)
 (use-package spaceline-config

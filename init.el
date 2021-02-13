@@ -296,7 +296,6 @@
   (add-hook 'rspec-mode-hook #'yas-minor-mode))
 
 (use-package yaml-mode
-  :ensure t
   :mode (".yaml$")
   :hook
   (yaml-mode . yaml-mode-outline-hook)

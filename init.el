@@ -232,7 +232,8 @@
   (setq dumb-jump-force-searcher 'rg)
   (setq dumb-jump-selector 'ivy)
   (setq dumb-jump-max-find-time 5)
-  :hook ((xref-backend-functions . dumb-jump-xref-activate))
+  :init
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
   :chords (("dj" . xref-find-definitions)
            ("p@" . dumb-jump-go-prompt)))
 

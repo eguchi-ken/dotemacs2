@@ -50,6 +50,10 @@
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
 
+(use-package use-package-chords
+  :ensure t
+  :config (key-chord-mode 1))
+
 (use-package eguchi-ken
   :straight (eguchi-ken :type git :host github :repo "eguchi-ken/eguchi-ken.el"))
 
@@ -193,7 +197,9 @@
   :config
   (setq magit-completing-read-function 'ivy-completing-read)
   (setq magit-diff-refine-hunk t)
-  (remove-hook 'magit-refs-sections-hook 'magit-insert-tags))
+  (remove-hook 'magit-refs-sections-hook 'magit-insert-tags)
+  :chords (("gh" . magit-status))
+)
 
 (use-package forge
   :after magit
@@ -214,17 +220,9 @@
 (use-package key-chord
   :config
   (setq key-chord-two-keys-delay 0.04)
-  (key-chord-mode 1)
-  (key-chord-define-global "gh" 'magit-status)
-  (key-chord-define-global "sd" 'save-buffer)
-  (key-chord-define-global "dj" 'xref-find-definitions)
-  (key-chord-define-global "p@" 'dumb-jump-go-prompt)
-  (key-chord-define-global "i9" 'insert-current-date)
-  (key-chord-define-global "fp" 'file-full-path-org-link-to-clipboard)
-  (key-chord-define-global "cy" 'string-inflection-ruby-style-cycle)
-  (key-chord-define-global "o0" 'open-current-buffer-file)
-  (key-chord-define-global "kj" 'view-mode)
-)
+  :chords (("i9" . insert-current-date)
+           ("fp" . file-full-path-org-link-to-clipboard)
+           ("kj" . view-mode)))
 
 (use-package ripgrep
   :if (file-exists-p "/usr/local/bin/rg"))
@@ -234,7 +232,9 @@
   (setq dumb-jump-force-searcher 'rg)
   (setq dumb-jump-selector 'ivy)
   (setq dumb-jump-max-find-time 5)
-  :hook ((xref-backend-functions . dumb-jump-xref-activate)))
+  :hook ((xref-backend-functions . dumb-jump-xref-activate))
+  :chords (("dj" . xref-find-definitions)
+           ("p@" . dumb-jump-go-prompt)))
 
 (use-package spaceline)
 (use-package spaceline-config
@@ -307,7 +307,8 @@
 
 (use-package go-mode)
 (use-package slim-mode)
-(use-package string-inflection)
+(use-package string-inflection
+  :chords (("cy" . string-inflection-ruby-style-cycle)))
 
 (use-package rotate)
 (use-package graphql-mode)

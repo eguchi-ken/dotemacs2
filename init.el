@@ -234,7 +234,7 @@
 
 (use-package dumb-jump
   :config
-  (setq dumb-jump-force-searcher 'rg)
+  (setq dumb-jump-prefer-searcher 'rg)
   (setq dumb-jump-selector 'ivy)
   (setq dumb-jump-max-find-time 5)
   :init

@@ -82,12 +82,12 @@
   :config
   (setq ruby-insert-encoding-magic-comment nil)
   (setq ruby-deep-indent-paren-style nil)
-  (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\Gemfile$" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\Schemafile$" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\Steepfile$" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\ruby$" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\rbs$" . ruby-mode))
+  :mode (("\\Gemfile$" . ruby-mode)
+         ("\\Schemafile$" . ruby-mode)
+         ("\\Steepfile$" . ruby-mode)
+         ("\\ruby$" . ruby-mode)
+         ("\\rbs$" . ruby-mode)
+         ("\\.rake$" . ruby-mode))
   :init
   (defun ruby-mode-custom-hook ()
     (interactive)
@@ -256,12 +256,12 @@
 
 (use-package web-mode
   :config
-  (add-to-list 'auto-mode-alist '("\\.js[x]?$" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.ts[x]?$" . web-mode))
   (setq web-mode-content-types-alist '(("jsx"  . ".js[x]?\\'")))
   (add-hook 'web-mode-hook (lambda()
     (setq web-mode-code-indent-offset 2)
-    (setq web-mode-markup-indent-offset 2))))
+    (setq web-mode-markup-indent-offset 2)))
+  :mode (("\\.js[x]?$" . web-mode)
+         ("\\.ts[x]?$" . web-mode)))
 
 (use-package eww
   :config

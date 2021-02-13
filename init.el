@@ -288,13 +288,11 @@
   :hook ((ruby-mode . ruby-electric-mode)))
 
 (use-package rspec-mode
-  :after (yasnippet)
   :config
-  ;; @see https://github.com/pezra/rspec-mode#debugging
-  (add-hook 'after-init-hook 'inf-ruby-switch-setup)
   (setq rspec-use-spring-when-possible nil)
-  (rspec-install-snippets)
-  (add-hook 'rspec-mode-hook #'yas-minor-mode))
+  (defun rspec-runner () "bin/rspec")
+  ;; @see https://github.com/pezra/rspec-mode#debugging
+  (add-hook 'after-init-hook 'inf-ruby-switch-setup))
 
 (use-package yaml-mode
   :mode (".yaml$")

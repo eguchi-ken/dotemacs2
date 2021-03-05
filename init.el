@@ -196,7 +196,8 @@
   (dashboard-setup-startup-hook))
 
 (use-package company
-  :init (global-company-mode))
+  :init (global-company-mode)
+  :bind (("C-M-i" . company-complete)))
 
 (use-package magit
   :config
@@ -309,7 +310,10 @@
   :config
   (define-key yaml-mode-map (kbd "TAB") 'outline-toggle-children))
 
-(use-package go-mode)
+(use-package go-mode
+  :config
+  (add-to-list 'company-backends 'company-go))
+
 (use-package slim-mode)
 (use-package string-inflection
   :chords (("cy" . string-inflection-ruby-style-cycle)))
